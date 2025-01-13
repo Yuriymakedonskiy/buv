@@ -1,4 +1,14 @@
-*,::before,::after {box-sizing: border-box;cursor: none;}
+@import './mixins.scss';
+$red: #D12727;
+$white: #fff;
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    cursor: none;
+}
+
 ::-webkit-scrollbar {
     width: 4px;
 }
@@ -21,4 +31,204 @@
     background: $red;
     color: #fafafa;
 }
-:where(ul, ol):where([class]) {padding-left: 0;}body,:where(blockquote, figure):where([class]) {margin: 0;}:where(h1,h2,h3,h4,h5,h6,p,ul,ol,dl):where([class]) {margin-block: 0;}:where(dd[class]) {margin-left: 0;}:where(fieldset[class]) {margin-left: 0;padding: 0;border: none;}:where(ul[class]) {list-style: none;}:where(address[class]) {font-style: normal;}p {--paragraphMarginBottom: 24px;margin-block: 0;}p:where(:not([class]):not(:last-child)) {margin-bottom: var(--paragraphMarginBottom);}img,video {display: block;max-width: 100%;height: auto;}input,textarea,select,button {font: inherit;}html {height: 100%;scrollbar-gutter: stable;}html,:has(:target) {scroll-behavior: smooth;}body {min-height: 100%;line-height: 1.5;}a:where([class]) {display: inline-flex;}button,label {cursor: none;}:where([fill]:not([fill="none"],[fill^="url"])) {fill: currentColor;}:where([stroke]:not([stroke="none"])) {stroke: currentColor;}svg * {transition-property: fill, stroke;}:where(table) {border-collapse: collapse;border-color: currentColor;}p{margin-block: 0;}p:not(:last-child){margin-bottom: 24px;}@media (prefers-reduced-motion: reduce) {*,::before,::after {animation-duration: 0.01ms !important;animation-iteration-count: 1 !important;transition-duration: 0.01ms !important;scroll-behavior: auto !important;}}
+
+:where(ul, ol):where([class]) {
+    padding-left: 0;
+}
+
+body,
+:where(blockquote, figure):where([class]) {
+    margin: 0;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-museomoderno);
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    color: $red;
+    font-size: 1vw;
+    background-color: #11181e;
+    position: relative;
+    overflow: hidden;
+    font-display: swap;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @keyframes noise {
+
+        0%,
+        100% {
+            background-position: 0 0;
+        }
+
+        10% {
+            background-position: -5% -10%;
+        }
+
+        20% {
+            background-position: -15% 5%;
+        }
+
+        30% {
+            background-position: 7% -25%;
+        }
+
+        40% {
+            background-position: 20% 25%;
+        }
+
+        50% {
+            background-position: -25% 10%;
+        }
+
+        60% {
+            background-position: 15% 5%;
+        }
+
+        70% {
+            background-position: 0% 15%;
+        }
+
+        80% {
+            background-position: 25% 35%;
+        }
+
+        90% {
+            background-position: -10% 10%;
+        }
+    }
+
+    &:before {
+        content: "";
+        z-index: 1000;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('../public/background-noise.png');
+        pointer-events: none;
+        opacity: 1;
+        animation: noise 0.2s infinite;
+    }
+
+    @include for-laptop {
+        font-size: 1rem;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+    margin-block: 0;
+}
+
+:where(dd[class]) {
+    margin-left: 0;
+}
+
+:where(fieldset[class]) {
+    margin-left: 0;
+    padding: 0;
+    border: none;
+}
+
+:where(ul[class]) {
+    list-style: none;
+}
+
+:where(address[class]) {
+    font-style: normal;
+}
+
+p {
+    --paragraphMarginBottom: 24px;
+    margin-block: 0;
+}
+
+p:where(:not([class]):not(:last-child)) {
+    margin-bottom: var(--paragraphMarginBottom);
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+input,
+textarea,
+select,
+button {
+    font: inherit;
+}
+
+html {
+    height: 100%;
+    scrollbar-gutter: stable;
+}
+
+html,
+:has(:target) {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100%;
+    line-height: 1.5;
+}
+
+a:where([class]) {
+    display: inline-flex;
+}
+
+button,
+label {
+    cursor: none;
+}
+
+:where([fill]:not([fill="none"], [fill^="url"])) {
+    fill: currentColor;
+}
+
+:where([stroke]:not([stroke="none"])) {
+    stroke: currentColor;
+}
+
+svg * {
+    transition-property: fill, stroke;
+}
+
+:where(table) {
+    border-collapse: collapse;
+    border-color: currentColor;
+}
+
+p {
+    margin-block: 0;
+}
+
+p:not(:last-child) {
+    margin-bottom: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
