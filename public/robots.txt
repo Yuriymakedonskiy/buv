@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://buvbuvbuv.ru
+
+# Sitemaps
+Sitemap: https://buvbuvbuv.ru/sitemap.xml

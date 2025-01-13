@@ -1,0 +1,56 @@
+@import './mixins.scss';
+$red: #D12727;
+$white: #fff;
+
+.footer {}
+
+.prevBlock {
+    margin-bottom: 100vh;
+}
+
+.contacts {
+    background-color: #11181e;
+    height: 100vh;
+    width: 100vw;
+    padding-top: 3.75em;
+    padding-bottom: 3.75em;
+    position: fixed;
+    inset: auto 0% 0%;
+    z-index: 0;
+    pointer-events: auto;
+    a{
+        color: #D12727;
+    }
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+
+        .contacts__title,
+        .contacts__email {
+            font-size: 8vw;
+            font-weight: 100;
+            transition: .4s ease;
+            text-transform: uppercase;
+        }
+
+        .contacts__title {
+            letter-spacing: -0.06em;
+            color: $white;
+            line-height: 100%;
+            position: relative;
+        }
+
+        .contacts__email {
+            font-weight: 200;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+// Миксины для медиазапросов
+@mixin for-mobile {
+  @media (max-width: 520px) {
+    @content;
+  }
+}
+@mixin for-tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin for-laptop {
+  @media (max-width: 991px) {
+    @content;
+  }
+}
+@mixin for-desktop {
+ @media (max-width: 1440px) {
+    @content;
+  }
+}
+@mixin for-large-desktop {
+  @media (min-width: 1920px) {
+    @content;
+  }
+}
