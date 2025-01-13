@@ -2,29 +2,6 @@
 $red: #D12727;
 $white: #fff;
 
-::-webkit-scrollbar {
-    width: 4px;
-}
-
-::-webkit-scrollbar-corner {
-    display: none;
-    height: 0px;
-    width: 0px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #11181e;
-}
-
-::selection {
-    background: $red;
-    color: #fafafa;
-}
-
 html {
     overflow-x: hidden;
 }
