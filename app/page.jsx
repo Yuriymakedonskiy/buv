@@ -27,6 +27,31 @@ export default function Home() {
   const about__text_anim = useRef(null);
   const headerRef = useRef(null);
   const lastScroll = useRef(0)
+  const bannerRef = useRef(null);
+  const daliSound = useRef(null); 
+  const isAudioPlayingDali = useRef(false); 
+  useEffect(() => {
+    const banner = bannerRef.current;
+    const audio = daliSound.current;
+    if (!banner) return;
+    const handleMouseMove = (e) => {
+    if (audio && !isAudioPlayingDali.current) {
+      audio.play()
+        .then(() => {
+          // Успешное воспроизведение
+          isAudioPlayingDali.current = true;
+          console.log("Аудио успешно воспроизведено");
+        })
+        .catch((error) => {
+          console.warn("Автопроигрывание заблокировано браузером:", error);
+        });
+    }
+  }
+    banner.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      banner.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
   useEffect(() => {
     const banner__header_logo = document.querySelector('.banner__header_logo');
     const banner = document.querySelector('.banner');
@@ -76,7 +101,6 @@ export default function Home() {
     };
   }, []);
   useEffect(() => {
-    const audio = document.querySelector('.daliSound');
     const banner = document.querySelector('.banner');
     const header = document.querySelector('.banner__header');
     const daliPhoto = document.querySelector('.banner__dali_img');
@@ -104,13 +128,6 @@ export default function Home() {
           webkitTextFillColor: 'transparent',
           duration: 1,
           ease: 'power2.out',
-        });
-      }
-      // Воспроизведение звука
-      if (audio) {
-        audio.play().catch((error) => {
-          // console.log('Автопроигрывание заблокировано браузером:', error);
-          console.warn('Автопроигрывание заблокировано браузером:', error);
         });
       }
       // Анимация мерцания фото
@@ -439,7 +456,7 @@ export default function Home() {
   }, []);
   return (
     <main>
-      <audio className={`daliSound ${styles.daliSound}`} src="/audio/dali.mp3"></audio>
+      <audio ref={daliSound} className={`daliSound ${styles.daliSound}`} src="/audio/dali.mp3" preload="auto" />
       <audio ref={agnelliSound} className={`${styles.agnelliSound}`} src="/audio/agnelli.mp3"></audio>
       <div
         ref={cursorRef}
@@ -459,7 +476,7 @@ export default function Home() {
         }}
       />
       <div className={`${styles.main}`}>
-        <div className={`banner ${SignikaT.className} ${styles.banner}`}>
+        <div ref={bannerRef} className={`banner ${SignikaT.className} ${styles.banner}`}>
           <div className={`${styles.banner__inner}`}>
             <header ref={headerRef} className={`banner__header ${styles.banner__header}`}>
               <div className={`${styles.banner__text}`}>
