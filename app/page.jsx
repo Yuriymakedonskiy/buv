@@ -538,7 +538,7 @@ export default function Home() {
                 ref={about__text_anim}
                 className={`white_text about__text about__text_anim ${about.about__text}`}>
                 <p>
-                  end-to-end digital developer, работаю удалённо, подхожу к делу с тем же вкусом и вниманием к деталям, как Джанни Аньелли выбирал свои галстуки.
+                  end-to-end digital developer, работаю удалённо, подхожу к делу с тем же вкусом и вниманием к деталям, как Джанни Аньелли выбирал свои рубашки.
                 </p>
                 <p className={`about__saying ${about.about__saying}`}>
                   'Стиль это всё' — закон Аньелли. Наведи и убедись.
@@ -555,16 +555,16 @@ export default function Home() {
                 YOU AND ME
               </h2>
               <ul className={`skills__list ${skills.skills__list}`}>
-                <li data-text="Разработаем концепцию, которая выделит ваш продукт" className={`cursorHover skills__item ${skills.skills__item}`}>
+                <li data-text="Придумаем концепцию, которая выделит ваш продукт" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
                   Придумаем
                 </li>
-                <li data-text="Построим уникальное решение для вашего проекта" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                <li data-text="Создадим уникальное решение для вашего проекта" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
                   создадим
                 </li>
-                <li data-text="Воплотим ваши идеи в реальность и доведем до результата" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                <li data-text="Реализуем ваши идеи в реальность и доведем до результата" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
                   РЕАЛИЗУЕМ
                 </li>
-                <li data-text="Интегрируем передовые технологии в ваш бизнес" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                <li data-text="Внедрим передовые технологии в ваш бизнес" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
                   внедрим
                 </li>
               </ul>
@@ -914,6 +914,7 @@ export default function Home() {
                       </p>
                       <p>
                         <strong>Презентация:</strong>
+                        <br />
                         Презентация проекта доступна для изучения, раскрывая потенциал платформы в развитии регионального авиасообщения.
                       </p>
                     </div>
@@ -933,6 +934,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+      
     </main>
+    
   );
 }
