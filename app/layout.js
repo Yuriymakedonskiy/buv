@@ -2,6 +2,7 @@ import "./normalize.scss";
 export const metadata = {
   title: "End-to-End Digital Developer | Цифровые продукты полного цикла",
   description: "Разработчик цифровых продуктов полного цикла. Создание и внедрение решений от концепции до поддержки.",
+  keywords: "портфолио, веб-разработчик, уникальные сайты, шепот идей, крик экрана, современный веб-дизайн, авторские проекты, индивидуальный стиль",
   openGraph: {
     title: "End-to-End Digital Developer | Цифровые продукты полного цикла",
     description: "Предоставляю услуги по разработке и внедрению цифровых решений полного цикла. Обеспечиваю полный процесс — начиная с обсуждения идеи и создания концепции приложения до его реализации и дальнейшей поддержки.",
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={metadata.description} />
+        <meta name="keywords" content={metadata.keywords}/>
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:image" content={metadata.openGraph.image} />
