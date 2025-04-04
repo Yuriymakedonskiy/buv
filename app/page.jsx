@@ -513,8 +513,8 @@ export default function Home() {
               </div>
               <div className={`${styles.banner__end}`}>
                 <h1 className={`cursorHover banner__logo ${MuseoModernoT.className} ${styles.banner__logo}`}>buv</h1>
-                <div className={`${styles.banner__info}`}>end-to-end digital developer
-                  <p>цифровые продукты полного цикла.</p>
+                <div className={`${styles.banner__info}`}>digital developer
+                  <p>цифровые продукты под ключ.</p>
                 </div>
               </div>
             </div>
@@ -538,7 +538,7 @@ export default function Home() {
                 ref={about__text_anim}
                 className={`white_text about__text about__text_anim ${about.about__text}`}>
                 <p>
-                  end-to-end digital developer, работаю удалённо, подхожу к делу с тем же вкусом и вниманием к деталям, как Джанни Аньелли выбирал свои рубашки.
+                  Digital developer, работаю удалённо, подхожу к делу с тем же вкусом и вниманием к деталям, как Джанни Аньелли выбирал свои рубашки.
                 </p>
                 <p className={`about__saying ${about.about__saying}`}>
                   'Стиль это всё' — закон Аньелли. Наведи и убедись.
