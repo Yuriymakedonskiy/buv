@@ -2,7 +2,6 @@
 $red: #D12727;
 $white: #fff;
 
-
     .white_text {
         color: #fff;
         mix-blend-mode: exclusion;
@@ -264,3 +263,132 @@ $white: #fff;
             }
         }
     }
+
+    .journal {
+        // background-color: #000000;
+        // z-index: 99999;
+        position: absolute;
+        // width: 100vw;
+        // height: 100vh;
+       
+    }
+      .journal__popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            scale: 0;
+            background-color: #11181e;
+            // z-index: 99999;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+
+            // visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s, scale 0.5s;
+          }
+      
+          .journal__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+          }
+          .journal__img {
+            position: absolute;
+            max-width: 7em;
+            // opacity: 0.2;
+            transition: transform 0.4s ease-out;
+            // mix-blend-mode;
+            @include for-mobile {
+                max-width:18vw;
+            
+            }
+
+            &:nth-child(1) { 
+                top: 20%; left: 15%; 
+                
+                @include for-laptop {
+                    top: 25%; left: 15%; 
+                }
+        
+            }
+            &:nth-child(2) { 
+                top: 20%; right: 15%; 
+                @include for-laptop {
+                                top: 22%; left: 0%; 
+                }
+
+            }
+            
+            &:nth-child(4) { 
+                top: 35%; left: 10%; 
+                @include for-laptop {
+                                top: 22%; left: 30%; 
+
+                }
+
+            }
+            &:nth-child(6) { 
+                top: 35%; right: 10%; 
+                @include for-laptop {
+                                top: 25%; left: -15%; 
+                }
+
+            }
+
+            &:nth-child(8) { 
+                top: 54%; left: 15%;
+                @include for-laptop {
+                                top: 25%; left: 45%;
+                }
+
+            }
+            &:nth-child(5) { 
+                top: 54%; right: 15%; 
+                @include for-laptop {
+                                top: 25%; left: 75%; 
+                }
+
+            }
+            
+
+            &:nth-child(7) {
+                 top: 65%; left: 10%; 
+                 @include for-laptop {
+                                top: 22%; left: 60%; 
+                }
+
+            }
+            &:nth-child(3) {
+                 top: 65%; right: 10%; 
+                 @include for-laptop {
+                                top: 22%; left: 90%; 
+                }
+
+            }
+          }
+
+          .journal__link{
+            color:#fafafa;
+            transition: 1s ease;
+            font-size: 1.2em;
+          }
+
+    //   .journal__containerWhite, .journal__containerBlack {
+    //     width: 50%;
+    //     height: 100%;
+    //   }
+    
+    //   .journal__containerWhite {
+    //     background: white;
+    //   }
+    
+    //   .journal__containerBlack {
+    //     background: black;
+    //   }
+    

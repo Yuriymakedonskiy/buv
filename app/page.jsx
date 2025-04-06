@@ -1,8 +1,11 @@
 "use client";
 import { MuseoModerno, Inter } from "next/font/google";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from '@studio-freight/lenis'
+
+
 gsap.registerPlugin(ScrollTrigger);
 const MuseoModernoT = MuseoModerno({
   variable: "--font-museomoderno",
@@ -28,25 +31,78 @@ export default function Home() {
   const headerRef = useRef(null);
   const lastScroll = useRef(0)
   const bannerRef = useRef(null);
-  const daliSound = useRef(null); 
-  const isAudioPlayingDali = useRef(false); 
+  const daliSound = useRef(null);
+  const isAudioPlayingDali = useRef(false);
+  const [isOpenJournal, setIsOpenJournal] = useState(false);
+  const popupJournalRef = useRef(null);
+  const buttonJournalRef = useRef(null);
+
+  // useEffect(() => {
+  //   const lenis = new Lenis({
+  //     duration: 1.2, // Плавность прокрутки
+  //     easing: (t) => t, // Линейное движение
+  //     smoothWheel: true,
+  //     smoothTouch: false,
+  //   });
+
+  //   // Рендерим анимацию
+  //   function raf(time) {
+  //     lenis.raf(time);
+  //     requestAnimationFrame(raf);
+  //   }
+
+  //   requestAnimationFrame(raf);
+
+  //   return () => {
+  //     lenis.destroy(); // Удалить при размонтировании компонента
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    if (isOpenJournal) {
+      gsap.to(buttonJournalRef, {
+        position: 'absolute', left: 50, top: 10, zIndex: 99999, duration: 1, ease: 'power2.out'
+      });
+
+
+      gsap.to(popupJournalRef.current, {
+        opacity: 1,
+        scale: 1,
+        // visibility: 'visible',
+        duration: 1,
+        ease: 'power5.inOut',
+
+        zIndex: 999,
+      });
+    } else {
+      gsap.to(popupJournalRef.current, {
+        opacity: 0,
+        scale: 0,
+        ease: 'power5.inOut',
+        // visibility: 'hidden',
+        zIndex: 0,
+        duration: 1,
+      });
+    }
+  }, [isOpenJournal]);
+
   useEffect(() => {
     const banner = bannerRef.current;
     const audio = daliSound.current;
     if (!banner) return;
     const handleMouseMove = (e) => {
-    if (audio && !isAudioPlayingDali.current) {
-      audio.play()
-        .then(() => {
-          // Успешное воспроизведение
-          isAudioPlayingDali.current = true;
-          console.log("Аудио успешно воспроизведено");
-        })
-        .catch((error) => {
-          console.warn("Автопроигрывание заблокировано браузером:", error);
-        });
+      if (audio && !isAudioPlayingDali.current) {
+        audio.play()
+          .then(() => {
+            // Успешное воспроизведение
+            isAudioPlayingDali.current = true;
+            console.log("Аудио успешно воспроизведено");
+          })
+          .catch((error) => {
+            console.warn("Автопроигрывание заблокировано браузером:", error);
+          });
+      }
     }
-  }
     banner.addEventListener("mousemove", handleMouseMove);
     return () => {
       banner.removeEventListener("mousemove", handleMouseMove);
@@ -326,7 +382,7 @@ export default function Home() {
         onComplete: () => {
           stack__saying.innerHTML = "'Инструменты меняются, цель остается прежней'<br>— Итальянская поговорка";
           gsap.to(stack__saying,
-             {
+            {
               opacity: 1,
               duration: 1,
               ease: 'power1.inOut',
@@ -352,7 +408,7 @@ export default function Home() {
           console.warn("Автопроигрывание заблокировано браузером:", error);
         });
         isAudioPlaying.current = true; // Устанавливаем флаг
-      }      
+      }
       // Обновление clip-path для псевдоэлемента ::before
       gsap.to(aboutblock, {
         '--clip-path': `circle(4em at ${x}px ${y}px)`,
@@ -379,12 +435,12 @@ export default function Home() {
     };
     const aboutblock = about__text_anim.current;
     if (!aboutblock) return;
-  aboutblock.addEventListener('mousemove', handleMouseMove);
-  aboutblock.addEventListener('mouseleave', handleMouseLeave);
-  return () => {
-    aboutblock.removeEventListener('mousemove', handleMouseMove);
-    aboutblock.removeEventListener('mouseleave', handleMouseLeave);
-  };
+    aboutblock.addEventListener('mousemove', handleMouseMove);
+    aboutblock.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      aboutblock.removeEventListener('mousemove', handleMouseMove);
+      aboutblock.removeEventListener('mouseleave', handleMouseLeave);
+    };
   }, []);
   useEffect(() => {
     gsap.fromTo(
@@ -454,6 +510,26 @@ export default function Home() {
       }
     );
   }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const imgs = document.querySelectorAll(`.${styles.journal__img}`);
+      const { clientX, clientY } = e;
+  
+      imgs.forEach((img, i) => {
+        const offset = 15 + (i+10) * 10;
+        const moveX = ((clientX / window.innerWidth) - 0.5) * offset;
+        const moveY = ((clientY / window.innerHeight) - 0.5) * offset;
+        img.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+      });
+    };
+  
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+
+  
   return (
     <main>
       <audio ref={daliSound} className={`daliSound ${styles.daliSound}`} src="/audio/dali.mp3" preload="auto" />
@@ -469,12 +545,177 @@ export default function Home() {
           borderRadius: "50%",
           backgroundColor: "white",
           pointerEvents: "none", // чтобы курсор не перекрывал клики
-          zIndex: 9999,
+          zIndex: 999999999,
           transform: "translate(-50%, -50%)",
           mixBlendMode: "exclusion",
 
         }}
       />
+      {/* <div className={`${styles.journal}`}> */}
+
+      <div ref={popupJournalRef} className={`${styles.journal__popup}`}>
+        <div className={styles.journal__bg}>
+
+          <Image
+            className={`${styles.journal__img}`}
+            src="/salvadorch1.jpg"
+            width={300}
+            height={200}
+            alt="Публикация про Сальвадора Дали Ч2"
+          />
+          <Image
+            className={`${styles.journal__img}`}
+            src="/Siberia.jpg"
+            width={300}
+            height={200}
+            alt="Сальвадор Дали"
+          />
+          <Image
+            className={`${styles.journal__img}`}
+            src="/firstWork.jpg"
+            width={300}
+            height={200}
+            alt="Публикация первая работа инноваторов"
+          />
+          <Image
+            className={`${styles.journal__img}`}
+            src="/agnelliInst.jpg"
+            width={300}
+            height={200}
+            alt="Публикация про Джанни Аньелли"
+          />
+          <Image
+            className={`${styles.journal__img}`}
+            src="/salvadorch2.jpg"
+            width={300}
+            height={200}
+            alt="Публикация про Сальвадора Дали Ч2"
+          />
+          <Image
+            className={`${styles.journal__img}`}
+            src="/chapayTeaser.jpg"
+            width={300}
+            height={200}
+            alt="Тизер публикации про Чапаева"
+          />
+          <Image
+            className={`${styles.journal__img}`}
+            src="/firstTeaser.jpg"
+            width={300}
+            height={200}
+            alt="Тизер публикации про Сальвадора Дали"
+          />
+          <Image
+            className={`${styles.journal__img}`}
+            src="/Чапаев.jpg"
+            width={300}
+            height={200}
+            alt="Публикация про Чапаева"
+          />
+        </div>
+        <span
+          className={`${SignikaT.className}`}
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '2em',
+            transform: 'translate(-50%, -50%)',
+            fontSize: '1.5em',
+            fontWeight: '500',
+            color: '#D12727',
+          }}
+          target="_blank" rel="noopener noreferrer">
+          ЖУРНАЛ
+        </span>
+        <div
+          className={`${SignikaT.className}`}
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            color: '#fefefe',
+            textAlign: 'center',
+            display:'flex',
+            flexDirection:'column',
+          }}
+        >
+
+        <span
+          style={{
+            fontSize: '1.4em',
+            fontWeight: '500',
+          }}
+          target="_blank" rel="noopener noreferrer">
+          Формат свободный. 
+          
+          Мысли — тоже.
+
+        </span>
+        
+        <div
+          className={`${SignikaT.className}`}
+          style={{
+            display:'flex',
+            marginTop:'1em',
+            flexDirection:'row',
+            justifyContent:'space-between'
+          }}
+        >
+
+          <a 
+          className={`cursorHoverBig ${styles.journal__link}`}
+           href="https://www.youtube.com/@buvbuvbuv" target="_blank" rel="noopener noreferrer">
+                    youtube
+                    <div className={`${styles.banner__link_svg}`}>
+                      <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </div>
+                  </a>
+          <a 
+          className={`cursorHoverBig ${styles.journal__link}`}
+           href="https://www.tiktok.com/@yuriybestuzhevbuv" target="_blank" rel="noopener noreferrer">
+                    tiktok
+                    <div className={`${styles.banner__link_svg}`}>
+                      <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </div>
+                  </a>
+          <a 
+          className={`cursorHoverBig ${styles.journal__link}`}
+           href="https://www.instagram.com/el__buv/" target="_blank" rel="noopener noreferrer">
+                    instagram
+                    <div className={`${styles.banner__link_svg}`}>
+                      <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </div>
+                  </a>
+                  </div>
+        </div>
+
+        <div
+          onClick={() => setIsOpenJournal(false)}
+        >
+          <span ref={buttonJournalRef}
+            className={`cursorHoverBig ${SignikaT.className}`}
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '90%',
+              transform: 'translate(-50%, -50%)',
+              fontSize: '1.2em',
+              color: '#D12727',
+            }}
+            target="_blank" rel="noopener noreferrer">
+            ЗАКРЫТЬ
+          </span>
+        </div>
+
+      </div>
+
       <div className={`${styles.main}`}>
         <div ref={bannerRef} className={`banner ${SignikaT.className} ${styles.banner}`}>
           <div className={`${styles.banner__inner}`}>
@@ -485,6 +726,25 @@ export default function Home() {
                     portfolio
                   </p>
                 </div>
+                <div className={`cursorHoverBig ${styles.banner__link}`}
+                  onClick={() => setIsOpenJournal(true)}
+                >
+                  <span style={{ fontSize: 15, 
+                  position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+                  color: '#D12727' }} target="_blank" rel="noopener noreferrer">
+                    ЖУРНАЛ
+                    {/* <div className={`${styles.banner__link_svg}`}> */}
+                    {/* <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg> */}
+                    {/* </div> */}
+                  </span>
+                </div>
+
+
                 <div className={`cursorHover ${styles.banner__link}`}>
                   <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
                     telegram
@@ -663,57 +923,11 @@ export default function Home() {
                       </div>
                     </div>
                     <div className={`${projects.projects__description}`}>
-                      <p>
-                        ЭталонТрансСервис. Западная Сибирь.
-                      </p>
-                      <p>
-                        <strong>Весь процесс:</strong>
-                        <br />
-                        От идеи до выгрузки на хостинг — занял 3 месяца. Заказчик изначально хотел сайт, но не знал, каким он должен быть, поэтому я тесно работал с ними, приезжал в офис и был постоянно на связи по телефону.
-                      </p>
-                      <p>
-                        <strong>Особенности сайта:</strong>
-                        <br />
-                        На сайте есть разные информационные блоки, например, описание компании. Но особенно интересные вещи можно увидеть на странице вакансий.
-                        Выберите вакансию и нажмите «Подробнее» — увидите кнопку «Отправить резюме». То, что происходит дальше, вы вряд ли видели на других сайтах.
-                      </p>
-                      <p>
-                        <strong>Основная идея:</strong>
-                        <br />
-                        Предоставить компании возможность управлять контентом сайта без знания программирования.
-                        Через админ-панель можно заходить в базу данных и просто менять текст в таблицах. Эти изменения сразу отображаются на сайте.
-                        Например, на главной странице блок с услугами также выводится из базы данных, так что я не прописываю их в коде вручную.
-                        Внизу сайта есть ссылка на меня и мой логотип.
-                      </p>
-                      <p>
-                        <strong>Разработка:</strong>
-                        <br />
-                        Проект начался с реализации на Django и SQLite3, но через 3 месяца было принято решение перейти на React и MongoDB.
-                        Я полностью переписал серверную часть, разбил логику на React-компоненты, добавил хуки, коллбэки и использовал нужные React-пакеты.
-                        Также внедрил авторизацию и эндпоинты для работы с данными из MongoDB и настроил процесс поддержания работы сервера через менеджер <code>pm2</code>, чтобы сайт мог постоянно делать HTTP-запросы на хостинге.
-                      </p>
-                      <p>
-                        <strong>Логика админ-панели:</strong>
-                        <br />
-                        Теперь при переходе на <code>/admin</code> пользователь попадает на страницу авторизации.
-                        После успешного входа с логином и паролем админ получает доступ к MongoDB Compass, где может редактировать данные напрямую.
-                        Спустя 5 секунд после входа окно админки автоматически закрывается, так как в дальнейшем оно уже не нужно.
-                      </p>
-                      <p>
-                        <strong>Презентация:</strong>
-                        <br />
-                        Презентация проекта была подготовлена по просьбе технического директора и показана на форуме.
-                        Я рассказал о функционале и возможностях сайта. Уверен, что многим будет интересно ознакомиться.
-                      </p>
-                      <p>
-                        <strong>Результат:</strong>
-                        <br />
-                        Этот проект демонстрирует не только мои технические навыки, но и умение находить индивидуальные решения, работать с заказчиками и реализовывать сложные задачи с использованием современных технологий.
-                      </p>
+                      <p>ЭталонТрансСервис. Западная Сибирь. Разработка заняла 3 месяца с переходом с Django на React + MongoDB. Ключевые особенности: интерактивная страница вакансий с уникальной формой подачи резюме, админ-панель для правки контента через MongoDB Compass, автоматическое обновление данных на сайте, система авторизации с автоматическим закрытием сессии. Использованные технологии: Frontend - React (хуки, кастомные компоненты), Backend - Node.js + Express, база данных - MongoDB, деплой - PM2 для управления процессами. Особенность разработки: проведен полный рефакторинг с Django/SQLite3 на MERN-стек после 3 месяцев работы. Результат: создан гибкий CMS-инструмент для заказчика с возможностью самостоятельного управления контентом. Проект был представлен на отраслевом форуме. В подвале сайта размещен мой логотип как разработчика.</p>
                     </div>
 
                     <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
-                      <Image loading="lazy" alt="Проект" ref={imageRef}/>
+                      <Image loading="lazy" alt="Проект" ref={imageRef} />
                     </div>
                   </div>
                   <div className={`cursorHover projects__item ${projects.projects__item}`}
@@ -740,75 +954,7 @@ export default function Home() {
                       </div>
                     </div>
                     <div className={`${projects.projects__description}`}>
-                      <p>
-                        Верстка сайта по макету Итана Суэро
-                        (дизайнера с 2 номинациями на Awwwards и 12 наградами CSS Design Awards в категориях UI, UX, Special Kudos и Innovation)
-                      </p>
-                      <p><strong>Технологии и подходы:</strong></p>
-                      <strong>SCSS: </strong>
-                      <br />
-                      Все стили написаны с использованием SCSS для лучшей структурированности и поддержки кода.
-                      <br />
-                      <br />
-                      <strong>Адаптивность:</strong>
-                      <br />
-                      Для построения адаптивных и современных интерфейсов применялись технологии Flexbox и CSS Grid.
-                      Реализовал адаптивную верстку, написав собственные миксины, используя такие единицы измерения, как <code>px</code>, <code>em</code>, <code>rem</code>, <code>vw</code>.
-                      <br />
-                      <br />
-                      <br />
-                      <p><strong>Особенности проекта:</strong></p>
-                      <strong>Уникальный подход к типографике: </strong>
-                      <br />
-                      Для гибкости и масштабируемости я задал базовый размер шрифта на уровне <code>&lt;body&gt;</code>:
-                      <pre><code>
-                        body &#123;
-                        font-size: 1vw
-                        &#125;
-                      </code></pre>
-                      После этого стили для классов оформлялись через относительные единицы (<code>em</code>), например:
-                      <pre><code>.title
-                        font-size: 1.3em;
-                      </code></pre>
-                      Такой подход обеспечивает пропорциональное масштабирование шрифтов относительно ширины экрана, упрощая создание адаптивного дизайна.
-                      <br />
-                      <br />
-                      <strong>Функции SCSS:</strong>
-                      <br />
-                      Использовал современные функции <code>clamp()</code> и <code>calc()</code> для управления размерами и создания гибкой типографики.
-                      <br />
-                      <br />
-                      <strong>Методология BEM:</strong>
-                      <br />
-                      Строго придерживался методологии BEM для обеспечения читаемости и масштабируемости кода.
-                      <br />
-                      <br />
-                      <strong>Организация файловой структуры:</strong>
-                      <br />
-                      Отдельная папка для вспомогательных SCSS-файлов:
-                      <br />
-                      <br />
-                      <code>_normalize.scss</code> — нормализация стилей.
-                      <br />
-                      <code>_globals.scss</code> — общие стили.
-                      <br />
-                      <code>_mixins.scss</code> — миксины.
-                      <br />
-                      <code>_variables.scss</code> — переменные.
-                      <br />
-                      <br />
-                      Папка для стилей каждого компонента:
-                      <br />
-                      Каждый компонент имеет отдельный файл для лучшего управления и повторного использования кода.
-                      <br />
-                      <br />
-                      <p><strong>Результат:</strong>
-                        <br />
-                        Сайт полностью соответствует макету, является адаптивным и демонстрирует современный подход к разработке.
-                        Проект показывает навыки работы с дизайном высокого уровня и уверенное владение инструментами фронтенд-разработки.
-                      </p>
-                      <p>
-                      </p>
+                    Верстка сайта по макету Итана Суэро (дизайнера с 2 номинациями на Awwwards и 12 наградами CSS Design Awards в категориях UI, UX, Special Kudos и Innovation). Технологии и подходы: SCSS для структурированных стилей, адаптивность на Flexbox и CSS Grid с использованием px, em, rem, vw и кастомных миксинов. Особенности проекта: уникальная типографика с базовым размером шрифта 1vw и относительными единицами em для пропорционального масштабирования, применение функций clamp() и calc() для гибкой типографики, строгое следование методологии BEM. Файловая структура организована с разделением на _normalize.scss, _globals.scss, _mixins.scss, _variables.scss и отдельные файлы для каждого компонента. Результат: pixel-perfect соответствие макету, адаптивный дизайн, демонстрация профессионального владения современными инструментами фронтенд-разработки и работы с премиальным дизайном.
                     </div>
                     <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
                       <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
@@ -835,26 +981,7 @@ export default function Home() {
                       </div>
                     </div>
                     <div className={`${projects.projects__description}`}>
-                      <p>
-                        <strong>ЖК Эрмитаж, Краснодар</strong>
-                      </p>
-                      <p>
-                        Этот проект был выполнен в качестве тестового задания для веб-студии PIXEL2 на позицию верстальщика.
-                        Хотя я сразу отказался от предложения, поскольку моя специализация — frontend/fullstack разработка на React, а не верстка, я решил принять вызов.
-                        Задача была интересной: сверстать проект, используя исключительно <strong>HTML</strong>, <strong>SCSS</strong>, и <strong>React (hooks)</strong>, без сторонних плагинов, виджетов и анимационных фреймворков, как это часто делают многие студии.
-                      </p>
-                      <p>
-                        <strong>Что было реализовано:</strong>
-                        <ul>
-                          <li>Адаптивная верстка на SCSS.</li>
-                          <li>React-компоненты с hooks, без лишней сложности.</li>
-                          <li>Авторские анимации без сторонних библиотек.</li>
-                        </ul>
-                      </p>
-                      <p>
-                        Этот проект — пример моего профессионального подхода и универсальности.
-                        Я успешно решил задачу, обычно выходящую за рамки моей роли как React-разработчика,
-                        и продемонстрировал, что могу создавать качественные и оптимизированные интерфейсы с использованием современных технологий.
+                      <p>ЖК Эрмитаж в Краснодаре — тестовый проект для веб-студии PIXEL2, который я выполнил в качестве вызова самому себе, несмотря на свою основную специализацию в React/fullstack-разработке. Суть задачи заключалась в чистой реализации без использования сторонних библиотек: адаптивная верстка на SCSS, React-компоненты с хуками и авторские анимации создавались полностью с нуля. Этот опыт наглядно продемонстрировал мою способность выходить за рамки основной специализации и решать нестандартные задачи, создавая оптимизированные и качественные интерфейсы с использованием современных веб-технологий. Проект подтвердил мою универсальность как разработчика и готовность браться за сложные вызовы.
                       </p>
                     </div>
                     <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
@@ -888,35 +1015,7 @@ export default function Home() {
                       </div>
                     </div>
                     <div className={`${projects.projects__description}`}>
-                      <p>
-                        <strong>Алейдавиа: сайт авиалиний ХМАО-Югра — полная имитация цикла покупки авиабилетов</strong>
-                      </p>
-                      <p>
-                        Проект "Алейдавиа" — пример полного цикла разработки: от идеи до готового продукта.
-                        Это не только демонстрация технических навыков, но и реализация идеи, которая улучшает взаимодействие пользователя с авиасервисами.
-                      </p>
-                      <p>
-                        Ориентация на локальный рынок ХМАО подчёркивает внимание к региональным потребностям.
-                        Симуляция полного процесса — от покупки билета до регистрации через QR-код — демонстрирует,
-                        как современные технологии могут преобразить пользовательский опыт.
-                      </p>
-                      <p>
-                        <strong>Особенности проекта:</strong>
-                        <ul>
-                          <li>Полная имитация покупки билета, включая генерацию данных и подтверждение транзакции.</li>
-                          <li>QR-код для регистрации, обеспечивающий удобный и современный процесс оформления.</li>
-                          <li>Простота использования интерфейса, адаптированного для локального рынка.</li>
-                        </ul>
-                      </p>
-                      <p>
-                        Проект позволил мне проявить навыки взаимодействия с клиентами, разработки удобного интерфейса и интеграции сложных технологий.
-                        Уверен, такой подход ценен в проектах, где важны функциональность и удобство.
-                      </p>
-                      <p>
-                        <strong>Презентация:</strong>
-                        <br />
-                        Презентация проекта доступна для изучения, раскрывая потенциал платформы в развитии регионального авиасообщения.
-                      </p>
+                      <p>Алейдавиа — цифровая платформа для авиаперевозок ХМАО-Югры, реализующая полный цикл бронирования билетов от выбора рейса до электронной регистрации через QR-код. Проект разработан с упором на удобство региональных пассажиров и включает: симуляцию бронирования с генерацией билетов, эмуляцию платежного шлюза, адаптивный интерфейс и современную систему онлайн-регистрации. Решение демонстрирует комплексный подход к цифровизации локальных авиаперевозок с использованием актуальных веб-технологий и ориентированным на пользователя дизайном.</p>
                     </div>
                     <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
                       <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
@@ -934,8 +1033,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
+
     </main>
-    
+
   );
 }

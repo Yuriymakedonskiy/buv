@@ -42,7 +42,12 @@ body,
 }
 
 html {
+    padding: 0;
+    margin: 0;
+    overscroll-behavior: none;
+    scroll-behavior: auto !important; /* отключаем нативный smooth */
     overflow-x: hidden;
+
 }
 
 body {
