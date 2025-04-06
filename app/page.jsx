@@ -37,26 +37,26 @@ export default function Home() {
   const popupJournalRef = useRef(null);
   const buttonJournalRef = useRef(null);
 
-  // useEffect(() => {
-  //   const lenis = new Lenis({
-  //     duration: 1.2, // Плавность прокрутки
-  //     easing: (t) => t, // Линейное движение
-  //     smoothWheel: true,
-  //     smoothTouch: false,
-  //   });
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2, // Плавность прокрутки
+      easing: (t) => t, // Линейное движение
+      smoothWheel: true,
+      smoothTouch: false,
+    });
 
-  //   // Рендерим анимацию
-  //   function raf(time) {
-  //     lenis.raf(time);
-  //     requestAnimationFrame(raf);
-  //   }
+    // Рендерим анимацию
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
-  //   requestAnimationFrame(raf);
+    requestAnimationFrame(raf);
 
-  //   return () => {
-  //     lenis.destroy(); // Удалить при размонтировании компонента
-  //   };
-  // }, []);
+    return () => {
+      lenis.destroy(); // Удалить при размонтировании компонента
+    };
+  }, []);
 
   useEffect(() => {
     if (isOpenJournal) {
