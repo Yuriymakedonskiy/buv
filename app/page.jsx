@@ -4,7 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from '@studio-freight/lenis'
-
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import { Model } from '@/app/components/animateFigure';
 
 gsap.registerPlugin(ScrollTrigger);
 const MuseoModernoT = MuseoModerno({
@@ -23,6 +25,13 @@ import contacts from "./contacts.module.scss";
 import stack from "./stack.module.scss";
 import skills from "./youandme.module.scss";
 
+
+
+const models = [
+  '/3D/iam.glb',
+  '/3D/sherlock.glb',
+  '/3D/realism.glb',
+];
 export default function Home() {
   const cursorRef = useRef(null);
   const imageContainerRef = useRef(null);
@@ -515,21 +524,30 @@ export default function Home() {
     const handleMouseMove = (e) => {
       const imgs = document.querySelectorAll(`.${styles.journal__img}`);
       const { clientX, clientY } = e;
-  
+
       imgs.forEach((img, i) => {
-        const offset = 15 + (i+10) * 10;
+        const offset = 15 + (i + 10) * 10;
         const moveX = ((clientX / window.innerWidth) - 0.5) * offset;
         const moveY = ((clientY / window.innerHeight) - 0.5) * offset;
         img.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
       });
     };
-  
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
 
-  
+  const [currentModelIndex, setCurrentModelIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentModelIndex((prevIndex) => (prevIndex + 1) % models.length);
+    }, 3000); // меняется каждые 3 секунды
+
+    return () => clearInterval(interval); // чистим таймер при выходе
+  }, []);
+
   return (
     <main>
       <audio ref={daliSound} className={`daliSound ${styles.daliSound}`} src="/audio/dali.mp3" preload="auto" />
@@ -636,64 +654,64 @@ export default function Home() {
             transform: 'translate(-50%, -50%)',
             color: '#fefefe',
             textAlign: 'center',
-            display:'flex',
-            flexDirection:'column',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
 
-        <span
-          style={{
-            fontSize: '1.4em',
-            fontWeight: '500',
-          }}
-          target="_blank" rel="noopener noreferrer">
-          Формат свободный. 
-          
-          Мысли — тоже.
+          <span
+            style={{
+              fontSize: '1.4em',
+              fontWeight: '500',
+            }}
+            target="_blank" rel="noopener noreferrer">
+            Формат свободный.
 
-        </span>
-        
-        <div
-          className={`${SignikaT.className}`}
-          style={{
-            display:'flex',
-            marginTop:'1em',
-            flexDirection:'row',
-            justifyContent:'space-between'
-          }}
-        >
+            Мысли — тоже.
 
-          <a 
-          className={`cursorHoverBig ${styles.journal__link}`}
-           href="https://www.youtube.com/@buvbuvbuv" target="_blank" rel="noopener noreferrer">
-                    youtube
-                    <div className={`${styles.banner__link_svg}`}>
-                      <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </div>
-                  </a>
-          <a 
-          className={`cursorHoverBig ${styles.journal__link}`}
-           href="https://www.tiktok.com/@yuriybestuzhevbuv" target="_blank" rel="noopener noreferrer">
-                    tiktok
-                    <div className={`${styles.banner__link_svg}`}>
-                      <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </div>
-                  </a>
-          <a 
-          className={`cursorHoverBig ${styles.journal__link}`}
-           href="https://www.instagram.com/el__buv/" target="_blank" rel="noopener noreferrer">
-                    instagram
-                    <div className={`${styles.banner__link_svg}`}>
-                      <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </div>
-                  </a>
-                  </div>
+          </span>
+
+          <div
+            className={`${SignikaT.className}`}
+            style={{
+              display: 'flex',
+              marginTop: '1em',
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }}
+          >
+
+            <a
+              className={`cursorHoverBig ${styles.journal__link}`}
+              href="https://www.youtube.com/@buvbuvbuv" target="_blank" rel="noopener noreferrer">
+              youtube
+              <div className={`${styles.banner__link_svg}`}>
+                <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </a>
+            <a
+              className={`cursorHoverBig ${styles.journal__link}`}
+              href="https://www.tiktok.com/@yuriybestuzhevbuv" target="_blank" rel="noopener noreferrer">
+              tiktok
+              <div className={`${styles.banner__link_svg}`}>
+                <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </a>
+            <a
+              className={`cursorHoverBig ${styles.journal__link}`}
+              href="https://www.instagram.com/el__buv/" target="_blank" rel="noopener noreferrer">
+              instagram
+              <div className={`${styles.banner__link_svg}`}>
+                <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </a>
+          </div>
         </div>
 
         <div
@@ -729,12 +747,14 @@ export default function Home() {
                 <div className={`cursorHoverBig ${styles.banner__link}`}
                   onClick={() => setIsOpenJournal(true)}
                 >
-                  <span style={{ fontSize: 15, 
-                  position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
-                  color: '#D12727' }} target="_blank" rel="noopener noreferrer">
+                  <span style={{
+                    fontSize: 15,
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    color: '#D12727'
+                  }} target="_blank" rel="noopener noreferrer">
                     ЖУРНАЛ
                     {/* <div className={`${styles.banner__link_svg}`}> */}
                     {/* <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -847,11 +867,12 @@ export default function Home() {
                   <li>react native</li>
                   <li>next</li>
                   <li>typescript</li>
+                  <li>gsap</li>
+                  <li>three</li>
                   <li>bem</li>
                   <li>sass</li>
                   <li>css modules</li>
                   <li>jquery</li>
-                  <li>gsap</li>
                 </ul>
                 <h5 className={`${stack.stack__subtitle}`}>Backend (API & Admin UI)</h5>
                 <ul className={`${stack.stack__back}`}>
@@ -954,7 +975,7 @@ export default function Home() {
                       </div>
                     </div>
                     <div className={`${projects.projects__description}`}>
-                    Верстка сайта по макету Итана Суэро (дизайнера с 2 номинациями на Awwwards и 12 наградами CSS Design Awards в категориях UI, UX, Special Kudos и Innovation). Технологии и подходы: SCSS для структурированных стилей, адаптивность на Flexbox и CSS Grid с использованием px, em, rem, vw и кастомных миксинов. Особенности проекта: уникальная типографика с базовым размером шрифта 1vw и относительными единицами em для пропорционального масштабирования, применение функций clamp() и calc() для гибкой типографики, строгое следование методологии BEM. Файловая структура организована с разделением на _normalize.scss, _globals.scss, _mixins.scss, _variables.scss и отдельные файлы для каждого компонента. Результат: pixel-perfect соответствие макету, адаптивный дизайн, демонстрация профессионального владения современными инструментами фронтенд-разработки и работы с премиальным дизайном.
+                      Верстка сайта по макету Итана Суэро (дизайнера с 2 номинациями на Awwwards и 12 наградами CSS Design Awards в категориях UI, UX, Special Kudos и Innovation). Технологии и подходы: SCSS для структурированных стилей, адаптивность на Flexbox и CSS Grid с использованием px, em, rem, vw и кастомных миксинов. Особенности проекта: уникальная типографика с базовым размером шрифта 1vw и относительными единицами em для пропорционального масштабирования, применение функций clamp() и calc() для гибкой типографики, строгое следование методологии BEM. Файловая структура организована с разделением на _normalize.scss, _globals.scss, _mixins.scss, _variables.scss и отдельные файлы для каждого компонента. Результат: pixel-perfect соответствие макету, адаптивный дизайн, демонстрация профессионального владения современными инструментами фронтенд-разработки и работы с премиальным дизайном.
                     </div>
                     <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
                       <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
@@ -1028,9 +1049,23 @@ export default function Home() {
         </div>
         <div className={`${contacts.contacts}`}>
           <div className={`${contacts.contacts__inner}`}>
-            <p className={`${SignikaT.className} ${contacts.contacts__title}`}>Идеи вне времени</p>
-            <a href="mailto:progbuv@mail.ru?subject=Идея!&body=Привет! Давай кое-что обсудим..." target="_blank" rel="noopener noreferrer" className={`cursorHoverBig ${MuseoModernoT.className} ${contacts.contacts__email}`}>progbuv@mail.ru</a>
+            {/* <p className={`${SignikaT.className} ${contacts.contacts__title}`}>Идеи вне времени</p> */}
+            <Canvas camera={{ position: [0, 0, 5], fov: 20 }}>
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[5, 5, 5]} />
+              <Model url={models[currentModelIndex]} />
+              <OrbitControls enableZoom={false} />
+            </Canvas>
+            <a href="mailto:urkabestyzhev@gmail.com?subject=Идея!&body=Здравствуйте! Давай кое-что обсудим..." target="_blank" rel="noopener noreferrer" className={`cursorHoverBig ${MuseoModernoT.className} ${contacts.contacts__email}`}>Связаться
+              <svg width=".4em" height='1em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+
+            <a href="mailto:urkabestyzhev@gmail.com?subject=Идея!&body=Здравствуйте! Давай кое-что обсудим..." target="_blank" rel="noopener noreferrer" className={`cursorHoverBig ${MuseoModernoT.className} ${contacts.contacts__link}`}>urkabestyzhev@gmail.com</a>
+                    
           </div>
+
         </div>
       </div>
 
