@@ -783,13 +783,13 @@ export default function Home() {
                 <div className={`${styles.banner__dali}`}>
                   <p>Интеллект без амбиций — <br /> птица без крыльев.</p>
                   <p> — Сальвадор Дали</p>
-                  {/* <Image
+                  <Image
                     className={`banner__dali_img cursorHoverBig ${styles.banner__dali_img}`}
                     src="/salvador.jpg"
                     width={300}
                     height={200}
                     alt="Сальвадор Дали"
-                  /> */}
+                  />
                 </div>
               </div>
 
@@ -1056,6 +1056,7 @@ export default function Home() {
                           </svg>
                         {/* </div> */}
                       </h2>
+                      <p className={`${projects.projects__subtitle_slejka}`}>введите код и следите за процессом в реальном времени</p>
                      </div>
                      <div className={`${projects.projects__description}`}>
           <Pincode/>

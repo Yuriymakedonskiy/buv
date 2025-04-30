@@ -58,8 +58,8 @@ $white: #fff;
         justify-content: space-between;
         align-items: baseline;
     }
-    
-    &__row_slejka{
+
+    &__row_slejka {
         display: block;
         text-align: center;
     }
@@ -82,7 +82,7 @@ $white: #fff;
         overflow: hidden;
         position: relative;
         color: $white;
-        transition: 
+        transition:
             opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
             max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
             padding 0.4s ease;
@@ -90,8 +90,8 @@ $white: #fff;
         transform: translateZ(0); // Аппаратное ускорение
         will-change: opacity, max-height; // Оптимизация
         width: 100%;
-        
-                a {
+
+        a {
             color: $white;
             font-weight: 400;
             font-style: italic;
@@ -116,6 +116,7 @@ $white: #fff;
         @include for-laptop {
             padding-inline: 4vw;
         }
+
         &:last-child {
             border-bottom: 1px solid #ccc;
         }
@@ -132,15 +133,16 @@ $white: #fff;
 
             .projects__description {
                 opacity: 1;
-            max-height: 7000px; // Достаточно большое значение
-            visibility: visible;
-            padding-block: 2em;
-            width: 80%;
-            margin-inline: auto;
+                max-height: 7000px; // Достаточно большое значение
+                visibility: visible;
+                padding-block: 2em;
+                width: 80%;
+                margin-inline: auto;
 
                 @include for-tablet {
                     width: 100%;
                 }
+
                 @include for-mobile {
                     width: 100%;
                     // padding-inline: 2vw;
@@ -156,7 +158,8 @@ $white: #fff;
                 opacity: 0;
                 visibility: hidden;
                 height: 0;
-                transition: opacity 0.2s ease, visibility 0s ease 0.2s, height 0s ease 0.2s;            }
+                transition: opacity 0.2s ease, visibility 0s ease 0.2s, height 0s ease 0.2s;
+            }
 
             .projects__link {
                 opacity: 1;
@@ -165,19 +168,20 @@ $white: #fff;
                 transition: opacity 0.3s ease 0.1s, visibility 0.3s ease 0.1s;
             }
 
-            .projects__title_slejka{
-                &:after{
-                    color: #fff;                    
+            .projects__title_slejka {
+                &:after {
+                    color: #fff;
                 }
-        
             }
-        
+            .projects__subtitle_slejka{
+                color: #fff;
+
+            }
+
         }
     }
 
-    &__item_slejka{
-
-    }
+    &__item_slejka {}
 
     &__link {
         opacity: 0;
@@ -191,6 +195,7 @@ $white: #fff;
         a {
             margin-left: 1em;
             color: $white;
+
             @include for-mobile {
                 font-size: 3.3vw;
             }
@@ -224,28 +229,29 @@ $white: #fff;
         }
     }
 
-    &__title_slejka{
+    &__title_slejka {
         font-size: 5vw;
         position: relative;
-        &:after{
-            display: flex;
-            line-height: 1.2;
-            flex-direction: column;
-            content: "введите код и следите за процессом в реальном времени";
-            font-size: 12px;
-            font-weight: 500;
-            color: #11181e;
-            letter-spacing: 1;
-            // position: absolute;
-            font-weight: 300;
-            // top: 95%;
-            // left: 50%;
-            width: 70%;
-            margin: 1px auto;
-            // transform: translate(-50%,-50%);
 
+        &:after {}
+    }
+
+    &__subtitle_slejka {
+        display: flex;
+        line-height: 1.2;
+        flex-direction: column;
+        content: "введите код и следите за процессом в реальном времени";
+        font-size: 15px;
+        font-weight: 500;
+        color: #11181e;
+        letter-spacing: 1;
+        font-weight: 300;
+        width: 70%;
+        margin: 1px auto;
+        transition: 1s all;
+        &:hover{
+            color: #fff;
         }
-
     }
 
     &__svg {
@@ -257,7 +263,8 @@ $white: #fff;
         transition: opacity 0.3s ease;
     }
 
-    &__text, .projects__slejka {
+    &__text,
+    .projects__slejka {
         z-index: 5;
         letter-spacing: .05vw;
         font-size: 1.1em;
@@ -271,6 +278,7 @@ $white: #fff;
         @include for-tablet {
             font-size: .7em;
         }
+
         @include for-mobile {
             font-size: 2.3vw;
         }
@@ -297,12 +305,12 @@ $white: #fff;
     color: $red;
 }
 
-.projects__slejka{
+.projects__slejka {
     font-size: 2em;
 
     font-weight: 500;
     // transform: translate(-50%,-50%);
-color: #11181e;
+    color: #11181e;
 }
 
 
