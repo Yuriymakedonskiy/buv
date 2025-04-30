@@ -58,6 +58,11 @@ $white: #fff;
         justify-content: space-between;
         align-items: baseline;
     }
+    
+    &__row_slejka{
+        display: block;
+        text-align: center;
+    }
 
     &__ets {
         svg {
@@ -159,7 +164,19 @@ $white: #fff;
                 display: flex;
                 transition: opacity 0.3s ease 0.1s, visibility 0.3s ease 0.1s;
             }
+
+            .projects__title_slejka{
+                &:after{
+                    color: #fff;                    
+                }
+        
+            }
+        
         }
+    }
+
+    &__item_slejka{
+
     }
 
     &__link {
@@ -207,6 +224,30 @@ $white: #fff;
         }
     }
 
+    &__title_slejka{
+        font-size: 5vw;
+        position: relative;
+        &:after{
+            display: flex;
+            line-height: 1.2;
+            flex-direction: column;
+            content: "введите код и следите за процессом в реальном времени";
+            font-size: 12px;
+            font-weight: 500;
+            color: #11181e;
+            letter-spacing: 1;
+            // position: absolute;
+            font-weight: 300;
+            // top: 95%;
+            // left: 50%;
+            width: 70%;
+            margin: 1px auto;
+            // transform: translate(-50%,-50%);
+
+        }
+
+    }
+
     &__svg {
         display: inline-flex;
         opacity: 0;
@@ -216,7 +257,7 @@ $white: #fff;
         transition: opacity 0.3s ease;
     }
 
-    &__text {
+    &__text, .projects__slejka {
         z-index: 5;
         letter-spacing: .05vw;
         font-size: 1.1em;
@@ -255,6 +296,15 @@ $white: #fff;
     letter-spacing: 0.04em;
     color: $red;
 }
+
+.projects__slejka{
+    font-size: 2em;
+
+    font-weight: 500;
+    // transform: translate(-50%,-50%);
+color: #11181e;
+}
+
 
 @keyframes scroll_text {
     100% {

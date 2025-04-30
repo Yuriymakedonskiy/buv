@@ -7,6 +7,7 @@ import Lenis from '@studio-freight/lenis'
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Model } from '@/app/components/animateFigure';
+import { Pincode } from "./components/pincode";
 
 gsap.registerPlugin(ScrollTrigger);
 const MuseoModernoT = MuseoModerno({
@@ -782,15 +783,16 @@ export default function Home() {
                 <div className={`${styles.banner__dali}`}>
                   <p>Интеллект без амбиций — <br /> птица без крыльев.</p>
                   <p> — Сальвадор Дали</p>
-                  <Image
+                  {/* <Image
                     className={`banner__dali_img cursorHoverBig ${styles.banner__dali_img}`}
                     src="/salvador.jpg"
                     width={300}
                     height={200}
                     alt="Сальвадор Дали"
-                  />
+                  /> */}
                 </div>
               </div>
+
               <div className={`${styles.banner__end}`}>
                 <h1 className={`cursorHover banner__logo ${MuseoModernoT.className} ${styles.banner__logo}`}>buv</h1>
                 <div className={`${styles.banner__info}`}>digital developer
@@ -799,9 +801,11 @@ export default function Home() {
               </div>
             </div>
           </div>
+
         </div>
         <div className={`${SignikaT.className}`}>
           <div className={`about ${about.about}`}>
+
             <div className={`${about.about__inner}`}>
               <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
                 <div className={`cursorHoverBig about__photo ${about.about__photo}`}>
@@ -814,6 +818,7 @@ export default function Home() {
                   />
                 </div>
               </a>
+              
               <div
                 ref={about__text_anim}
                 className={`white_text about__text about__text_anim ${about.about__text}`}>
@@ -1038,8 +1043,24 @@ export default function Home() {
                     <div className={`${projects.projects__description}`}>
                       <p>Алейдавиа — цифровая платформа для авиаперевозок ХМАО-Югры, реализующая полный цикл бронирования билетов от выбора рейса до электронной регистрации через QR-код. Проект разработан с упором на удобство региональных пассажиров и включает: симуляцию бронирования с генерацией билетов, эмуляцию платежного шлюза, адаптивный интерфейс и современную систему онлайн-регистрации. Решение демонстрирует комплексный подход к цифровизации локальных авиаперевозок с использованием актуальных веб-технологий и ориентированным на пользователя дизайном.</p>
                     </div>
-                    <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
-                      <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
+                  </div>
+                  <div className={`cursorHover projects__item ${projects.projects__item}`}
+                  onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}>
+
+                    <div className={`${projects.projects__row} ${projects.projects__row_slejka}`}>
+                      <h2 className={`${projects.projects__title} ${projects.projects__title_slejka}`}>Прозрачность работы
+                      {/* <div className={`${projects.projects__svg}`}> */}
+                          <svg width="1em" height='1em' viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        {/* </div> */}
+                      </h2>
+                     </div>
+                     <div className={`${projects.projects__description}`}>
+          <Pincode/>
+                     
+                      {/* <p>Алейдавиа — цифровая платформа для авиаперевозок ХМАО-Югры, реализующая полный цикл бронирования билетов от выбора рейса до электронной регистрации через QR-код. Проект разработан с упором на удобство региональных пассажиров и включает: симуляцию бронирования с генерацией билетов, эмуляцию платежного шлюза, адаптивный интерфейс и современную систему онлайн-регистрации. Решение демонстрирует комплексный подход к цифровизации локальных авиаперевозок с использованием актуальных веб-технологий и ориентированным на пользователя дизайном.</p> */}
                     </div>
                   </div>
                 </div>
@@ -1047,6 +1068,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+
         <div className={`${contacts.contacts}`}>
           <div className={`${contacts.contacts__inner}`}>
             {/* <p className={`${SignikaT.className} ${contacts.contacts__title}`}>Идеи вне времени</p> */}
