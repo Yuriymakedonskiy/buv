@@ -39,7 +39,7 @@ export function Pincode() {
 
   const validatePin = (input) => {
     if (input === "1977") {
-      router.push("https://disk.yandex.ru/d/OgZw3KLC2W5MQQ"); 
+      window.open("https://disk.yandex.ru/d/OgZw3KLC2W5MQQ", "_blank");
     } else {
       setError(true);
       playFailFeedback();

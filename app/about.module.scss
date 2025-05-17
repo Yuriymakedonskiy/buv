@@ -33,6 +33,7 @@ $white: #fff;
         display: flex;
         flex-direction: column;
         z-index: 9;
+
         margin-block: 3em;
 
         &:after {
@@ -101,6 +102,7 @@ $white: #fff;
     &__im {
         z-index: -10;
         width: 21vw;
+        border-radius: 1em;
         
         @include for-mobile {
 

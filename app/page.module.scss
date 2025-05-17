@@ -178,6 +178,7 @@ $white: #fff;
             line-height: 120%;
             color: #fafafa;
             width: 27.8%;
+
             flex-direction: column;
             display: flex;
             position: relative;
@@ -198,6 +199,8 @@ $white: #fff;
                 position: absolute;
                 width: 90%;
                 top: 0;
+        border-radius: 1em;
+
 
                 @include for-laptop {
                     width: 100%;
@@ -379,16 +382,16 @@ $white: #fff;
             font-size: 1.2em;
           }
 
-    //   .journal__containerWhite, .journal__containerBlack {
-    //     width: 50%;
-    //     height: 100%;
-    //   }
-    
-    //   .journal__containerWhite {
-    //     background: white;
-    //   }
-    
-    //   .journal__containerBlack {
-    //     background: black;
-    //   }
-    
+          .brukLogo {
+            // position: absolute;
+            max-width: 12em;
+            padding-block: 15px;
+            // opacity: 0.2;
+            transition: transform 0.4s ease-out;
+
+            // mix-blend-mode;
+            @include for-mobile {
+                max-width:18vw;
+            
+            }
+        }

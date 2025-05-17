@@ -137,7 +137,7 @@ export default function Home() {
       start: "bottom top", // Верх баннера касается верха окна
       end: "center bottom", // Низ баннера касается верха окна
       onEnter: () => changeText("buv"),
-      onLeaveBack: () => changeText("portfolio"),
+      onLeaveBack: () => changeText("Bestuzhev"),
     });
 
     return () => {
@@ -742,7 +742,7 @@ export default function Home() {
               <div className={`${styles.banner__text}`}>
                 <div className={`${MuseoModernoT.className}  ${styles.banner__left}`}>
                   <p className={`banner__header_logo ${MuseoModernoT.className} ${styles.banner__header_logo}`}>
-                    portfolio
+                  Bestuzhev
                   </p>
                 </div>
                 <div className={`cursorHoverBig ${styles.banner__link}`}
@@ -768,8 +768,7 @@ export default function Home() {
 
                 <div className={`cursorHover ${styles.banner__link}`}>
                   <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
-                    telegram
-                    <div className={`${styles.banner__link_svg}`}>
+                  обсудить проект                     <div className={`${styles.banner__link_svg}`}>
                       <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
@@ -829,8 +828,8 @@ export default function Home() {
                   'Стиль это всё' — закон Аньелли. Наведи и убедись.
                 </p>
                 <p>
-                  Если бы код был одеждой, мои проекты носили бы костюм от Brioni, но при этом чувствовали себя, как в любимом свитшоте.
-                </p>
+                Мои мобильные приложения, сайты и боты не только хорошо выглядят — они приносят результат. Люди возвращаются ко мне, потому что всё просто работает.
+</p>
               </div>
             </div>
           </div>
@@ -913,6 +912,33 @@ export default function Home() {
               <div className={`${projects.projects__inner}`}>
                 <h3 className={`projects__head ${projects.projects__head}`}>ПРОЕКТЫ</h3>
                 <div className="projects__list">
+                <div className={`cursorHover projects__item ${projects.projects__item}`}
+                    onMouseMove={handleMouseMove}
+                    onMouseEnter={() => handleMouseEnter("/bruk.jpg")}
+                    onMouseLeave={handleMouseLeave}>
+                    <div className={`${projects.projects__row}`}>
+                    <Image
+            className={`${styles.brukLogo}`}
+            src="/brukLogo.png"
+            width={300}
+            height={200}
+            alt="Логотип Брука бистро"
+          />
+                      {/* <h2 className={`${projects.projects__title}`}>
+
+                      </h2> */}
+                      <p className={` ${projects.projects__text}`}>Мобильное приложение, bot, сервера и БД для бистро</p>
+                      <div className={`${projects.projects__link}`}>
+                      Проект на паузе, но посмотреть материал можно введя пинкод
+                      </div>
+                    </div>
+                    <div className={`${projects.projects__description}`}>
+                    <Pincode/>
+                    </div>
+                    <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
+                      <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
+                    </div>
+                  </div>
                   <div className={`cursorHover projects__item ${projects.projects__item}`}
                     onMouseMove={handleMouseMove}
                     onMouseEnter={() => handleMouseEnter("/ets1.jpg")}
@@ -986,6 +1012,7 @@ export default function Home() {
                       <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
                     </div>
                   </div>
+
                   <div className={`cursorHover projects__item ${projects.projects__item}`}
                     onMouseMove={handleMouseMove}
                     onMouseEnter={() => handleMouseEnter("/ermitage.jpg")}
