@@ -740,16 +740,16 @@ export default function Home() {
           <div className={`${styles.banner__inner}`}>
             <header ref={headerRef} className={`banner__header ${styles.banner__header}`}>
               <div className={`${styles.banner__text}`}>
-                <div className={`${MuseoModernoT.className}  ${styles.banner__left}`}>
-                  <p className={`banner__header_logo ${MuseoModernoT.className} ${styles.banner__header_logo}`}>
+                <div className={`${SignikaT.className}  ${styles.banner__left}`}>
+                  {/* <p className={`banner__headerlogo`}> */}
                   Bestuzhev
-                  </p>
+                  {/* </p> */}
                 </div>
                 <div className={`cursorHoverBig ${styles.banner__link}`}
                   onClick={() => setIsOpenJournal(true)}
                 >
                   <span style={{
-                    fontSize: 15,
+                    // fontSize: 15,
                     position: 'absolute',
                     left: '50%',
                     top: '50%',
@@ -768,7 +768,7 @@ export default function Home() {
 
                 <div className={`cursorHover ${styles.banner__link}`}>
                   <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
-                  обсудить проект                     <div className={`${styles.banner__link_svg}`}>
+                  contact                <div className={`${styles.banner__link_svg}`}>
                       <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
@@ -894,6 +894,12 @@ export default function Home() {
                   <li>ajax</li>
                   <li>git</li>
                 </ul>
+                <h5 className={`${stack.stack__subtitle}`}>CMS (NO-CODE)</h5>
+                <ul className={`${stack.stack__back}`}>
+                  <li>WEBFLOW</li>
+                  <li>WORDPRESS</li>
+                  <li>TILDA</li>
+                </ul>
               </div>
               <div className={` stack__saying ${stack.stack__scroll_anim} ${stack.stack__saying}`}>
                 <p>
@@ -917,24 +923,28 @@ export default function Home() {
                     onMouseEnter={() => handleMouseEnter("/bruk.jpg")}
                     onMouseLeave={handleMouseLeave}>
                     <div className={`${projects.projects__row}`}>
-                    <Image
-            className={`${styles.brukLogo}`}
-            src="/brukLogo.png"
-            width={300}
-            height={200}
-            alt="Логотип Брука бистро"
-          />
-                      {/* <h2 className={`${projects.projects__title}`}>
 
-                      </h2> */}
+                      <h2 className={`${projects.projects__title}`}>
+Bruk
+                      </h2>
                       <p className={` ${projects.projects__text}`}>Мобильное приложение, bot, сервера и БД для бистро</p>
                       <div className={`${projects.projects__link}`}>
-                      Проект на паузе, но посмотреть материал можно введя пинкод
+                      <a
+                          href="/pdf/CoffeeMobile.pdf"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          презентация
+                        </a>
                       </div>
                     </div>
                     <div className={`${projects.projects__description}`}>
                     <Pincode/>
                     </div>
+                    <div className={`${projects.projects__link}`} style={{justifyContent:'center', margin:'-40px auto 20px auto'}}>
+                    Проект на паузе, но посмотреть материал можно введя пинкод
+
+                      </div>
                     <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
                       <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
                     </div>

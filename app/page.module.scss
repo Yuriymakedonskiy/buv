@@ -51,16 +51,31 @@ $white: #fff;
         }
 
         &__left {
-            font-weight: 100;
-            font-size: 1em;
+            letter-spacing: 1px;
 
             @include for-laptop {
-                font-size: .9em;
+                font-size: .35em;
             }
 
             @include for-mobile {
-                font-size: 6vw;
+                font-size: 3vw;
             }
+            font-size: .5em;
+
+            @include for-laptop {
+                font-size: .35em;
+            }
+
+            @include for-mobile {
+                font-size: 3vw;
+            }
+            // @include for-laptop {
+            //     font-size: .9em;
+            // }
+
+            // @include for-mobile {
+            //     font-size: 6vw;
+            // }
         }
 
         &__header {
