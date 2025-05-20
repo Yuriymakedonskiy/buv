@@ -851,7 +851,10 @@ const introSound = useRef(null);
                 <div className={`${styles.banner__info}`}>
                 <p className={`cursorHover  ${styles.banner__intro}`} onClick={playIntro}>послушай интро</p>
                 цифровые продукты под ключ  <p>
+                             
+                             <span>
                                   САЙТ / ПРИЛОЖЕНИЕ / БОТ
+                             </span>
 
                   </p>
                 </div>
