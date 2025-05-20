@@ -33,6 +33,11 @@ const models = [
   '/3D/sherlock.glb',
   '/3D/realism.glb',
 ];
+
+
+
+
+
 export default function Home() {
   const cursorRef = useRef(null);
   const imageContainerRef = useRef(null);
@@ -41,12 +46,15 @@ export default function Home() {
   const headerRef = useRef(null);
   const lastScroll = useRef(0)
   const bannerRef = useRef(null);
+  const banner__end = useRef(null);
   const daliSound = useRef(null);
   const isAudioPlayingDali = useRef(false);
   const [isOpenJournal, setIsOpenJournal] = useState(false);
   const popupJournalRef = useRef(null);
   const buttonJournalRef = useRef(null);
 
+
+  // window.scrollTo(0, 0)
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2, // Плавность прокрутки
@@ -67,6 +75,78 @@ export default function Home() {
       lenis.destroy(); // Удалить при размонтировании компонента
     };
   }, []);
+
+useEffect(() => {
+    gsap.from(headerRef.current, {
+      y: -200,        // сдвиг сверху
+      opacity: 0,     // из полной прозрачности
+      duration: 4,    // длительность анимации
+      ease: 'power4.out',
+    });
+  }, []);
+
+
+useEffect(() => {
+    gsap.from(headerRef.current, {
+      y: -200,        // сдвиг сверху
+      opacity: 0,     // из полной прозрачности
+      duration: 2,    // длительность анимации
+      ease: 'power4.out',
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.from(banner__end.current, {
+      opacity: 0,     // из полной прозрачности
+      duration: 2,    // длительность анимации
+      ease: 'power4.in',
+    });
+  }, []);
+
+const introSound = useRef(null);
+  const aboutRef = useRef(null);
+
+  const playIntro = () => {
+    const audio = introSound.current;
+    if (!audio) return;
+
+    if (!audio.paused) {
+      // Уже играет
+      return;
+    }
+
+    audio.play()
+    const el = document.getElementById("about");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+
+
+  const ScrollStack = (e) => {
+    e.preventDefault();
+    const el = document.getElementById("stack");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const ScrollProjects = (e) => {
+    e.preventDefault();
+    const el = document.getElementById("projects");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+
+  const playAudioDali = () => {
+    if (daliSound.current) {
+      daliSound.current.play();
+    }
+  };
+
 
   useEffect(() => {
     if (isOpenJournal) {
@@ -96,28 +176,7 @@ export default function Home() {
     }
   }, [isOpenJournal]);
 
-  useEffect(() => {
-    const banner = bannerRef.current;
-    const audio = daliSound.current;
-    if (!banner) return;
-    const handleMouseMove = (e) => {
-      if (audio && !isAudioPlayingDali.current) {
-        audio.play()
-          .then(() => {
-            // Успешное воспроизведение
-            isAudioPlayingDali.current = true;
-            console.log("Аудио успешно воспроизведено");
-          })
-          .catch((error) => {
-            console.warn("Автопроигрывание заблокировано браузером:", error);
-          });
-      }
-    }
-    banner.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      banner.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+
   useEffect(() => {
     const banner__header_logo = document.querySelector('.banner__header_logo');
     const banner = document.querySelector('.banner');
@@ -132,16 +191,7 @@ export default function Home() {
         },
       });
     };
-    ScrollTrigger.create({
-      trigger: banner,
-      start: "bottom top", // Верх баннера касается верха окна
-      end: "center bottom", // Низ баннера касается верха окна
-      onEnter: () => changeText("buv"),
-      onLeaveBack: () => changeText("Bestuzhev"),
-    });
-
     return () => {
-      // Уничтожение ScrollTrigger при размонтировании компонента
       ScrollTrigger.killAll();
     };
   }, []);
@@ -553,6 +603,7 @@ export default function Home() {
     <main>
       <audio ref={daliSound} className={`daliSound ${styles.daliSound}`} src="/audio/dali.mp3" preload="auto" />
       <audio ref={agnelliSound} className={`${styles.agnelliSound}`} src="/audio/agnelli.mp3"></audio>
+      <audio ref={introSound} className={`${styles.introSound}`} src="/audio/intro.mp3"></audio>
       <div
         ref={cursorRef}
         style={{
@@ -745,30 +796,32 @@ export default function Home() {
                   Bestuzhev
                   {/* </p> */}
                 </div>
-                <div className={`cursorHoverBig ${styles.banner__link}`}
+                <div className={`cursorHoverBig ${styles.banner__link} ${styles.banner__link_journal}`}
                   onClick={() => setIsOpenJournal(true)}
                 >
-                  <span style={{
-                    // fontSize: 15,
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    color: '#D12727'
-                  }} target="_blank" rel="noopener noreferrer">
+                  <span target="_blank" rel="noopener noreferrer">
                     ЖУРНАЛ
-                    {/* <div className={`${styles.banner__link_svg}`}> */}
-                    {/* <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg> */}
-                    {/* </div> */}
                   </span>
                 </div>
 
 
                 <div className={`cursorHover ${styles.banner__link}`}>
+                   <div className={` ${styles.banner__link_journal}`}
+                  onClick={() => setIsOpenJournal(true)}
+                >
+                  <span target="_blank" rel="noopener noreferrer">
+                    ЖУРНАЛ
+                  </span>
+                </div>
+
+                  <a href="#projects" onClick={ScrollProjects}>
+                    Проекты
+                  </a>
+                  <a href="#stack" onClick={ScrollStack}>
+                    Stack
+                  </a>
                   <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
-                  contact                <div className={`${styles.banner__link_svg}`}>
+                    Контакт                <div className={`${styles.banner__link_svg}`}>
                       <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
@@ -784,26 +837,31 @@ export default function Home() {
                   <p> — Сальвадор Дали</p>
                   <Image
                     className={`banner__dali_img cursorHoverBig ${styles.banner__dali_img}`}
-                    src="/salvador.jpg"
+                    src="/salvador.png"
                     width={300}
                     height={200}
+                    onClick={playAudioDali}
+
                     alt="Сальвадор Дали"
                   />
                 </div>
               </div>
 
-              <div className={`${styles.banner__end}`}>
-                <h1 className={`cursorHover banner__logo ${MuseoModernoT.className} ${styles.banner__logo}`}>buv</h1>
-                <div className={`${styles.banner__info}`}>digital developer
-                  <p>цифровые продукты под ключ.</p>
+              <div ref={banner__end} className={`${styles.banner__end}`}>
+                <div className={`${styles.banner__info}`}>
+                <p className={`cursorHover  ${styles.banner__intro}`} onClick={playIntro}>послушай интро</p>
+                цифровые продукты под ключ  <p>
+                                  САЙТ / ПРИЛОЖЕНИЕ / БОТ
+
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
         </div>
-        <div className={`${SignikaT.className}`}>
-          <div className={`about ${about.about}`}>
+        <div ref={aboutRef} className={`${SignikaT.className}`}>
+          <div  id="about" className={`about ${about.about}`}>
 
             <div className={`${about.about__inner}`}>
               <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
@@ -817,7 +875,7 @@ export default function Home() {
                   />
                 </div>
               </a>
-              
+
               <div
                 ref={about__text_anim}
                 className={`white_text about__text about__text_anim ${about.about__text}`}>
@@ -828,8 +886,8 @@ export default function Home() {
                   'Стиль это всё' — закон Аньелли. Наведи и убедись.
                 </p>
                 <p>
-                Мои мобильные приложения, сайты и боты не только хорошо выглядят — они приносят результат. Люди возвращаются ко мне, потому что всё просто работает.
-</p>
+                  Мои мобильные приложения, сайты и боты не только хорошо выглядят — они приносят результат. Люди возвращаются ко мне, потому что всё просто работает.
+                </p>
               </div>
             </div>
           </div>
@@ -854,13 +912,13 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className={`stack ${stack.stack}`}>
+          <div id="stack" className={`stack ${stack.stack}`}>
             <div className={` ${SignikaT.className} ${stack.stack__inner}`}>
               <div className={`${stack.stack__header}`}>
                 <h4 className={`${stack.stack__scroll_anim}  ${stack.stack__title}`}>Stack</h4>
                 <p className={`stack__float ${stack.stack__float}`}>
                   <span className={` ${stack.stack__buv}`}>
-                    buv.
+                    buv
                   </span>
                   создан на next.js</p>
               </div>
@@ -909,7 +967,7 @@ export default function Home() {
             </div>
           </div>
           <div className={`${contacts.footer}`}>
-            <div className={`projects ${contacts.prevBlock} ${SignikaT.className}  ${projects.projects}`}>
+            <div id="projects" className={`projects ${contacts.prevBlock} ${SignikaT.className}  ${projects.projects}`}>
               <div className={`contacts__carousel ${MuseoModernoT.className} ${projects.contacts__carousel}`}>
                 <div className={`contacts__wrapper ${projects.contacts__wrapper}`}>
                   <span className={`contacts__text ${projects.contacts__text}`}>Код Дизайн План Идея Сайт Бренд Ресурс Проект Тест Контент Запуск Продукт Интерфейс Модуль Задача</span>
@@ -918,18 +976,18 @@ export default function Home() {
               <div className={`${projects.projects__inner}`}>
                 <h3 className={`projects__head ${projects.projects__head}`}>ПРОЕКТЫ</h3>
                 <div className="projects__list">
-                <div className={`cursorHover projects__item ${projects.projects__item}`}
+                  <div className={`cursorHover projects__item ${projects.projects__item}`}
                     onMouseMove={handleMouseMove}
                     onMouseEnter={() => handleMouseEnter("/bruk.jpg")}
                     onMouseLeave={handleMouseLeave}>
                     <div className={`${projects.projects__row}`}>
 
                       <h2 className={`${projects.projects__title}`}>
-Bruk
+                        Bruk
                       </h2>
                       <p className={` ${projects.projects__text}`}>Мобильное приложение, bot, сервера и БД для бистро</p>
                       <div className={`${projects.projects__link}`}>
-                      <a
+                        <a
                           href="/pdf/CoffeeMobile.pdf"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -939,12 +997,12 @@ Bruk
                       </div>
                     </div>
                     <div className={`${projects.projects__description}`}>
-                    <Pincode/>
+                      <Pincode />
                     </div>
-                    <div className={`${projects.projects__link}`} style={{justifyContent:'center', margin:'-40px auto 20px auto'}}>
-                    Проект на паузе, но посмотреть материал можно введя пинкод
+                    <div className={`${projects.projects__link}`} style={{ justifyContent: 'center', margin: '-40px auto 20px auto' }}>
+                      Проект на паузе, но посмотреть материал можно введя пинкод
 
-                      </div>
+                    </div>
                     <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
                       <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
                     </div>
@@ -1082,22 +1140,22 @@ Bruk
                     </div>
                   </div>
                   <div className={`cursorHover projects__item ${projects.projects__item}`}
-                  onMouseMove={handleMouseMove}
+                    onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}>
 
                     <div className={`${projects.projects__row} ${projects.projects__row_slejka}`}>
                       <h2 className={`${projects.projects__title} ${projects.projects__title_slejka}`}>Прозрачность работы
-                      {/* <div className={`${projects.projects__svg}`}> */}
-                          <svg width="1em" height='1em' viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                          </svg>
+                        {/* <div className={`${projects.projects__svg}`}> */}
+                        <svg width="1em" height='1em' viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                         {/* </div> */}
                       </h2>
                       <p className={`${projects.projects__subtitle_slejka}`}>введите код и следите за процессом в реальном времени</p>
-                     </div>
-                     <div className={`${projects.projects__description}`}>
-          <Pincode/>
-                     
+                    </div>
+                    <div className={`${projects.projects__description}`}>
+                      <Pincode />
+
                       {/* <p>Алейдавиа — цифровая платформа для авиаперевозок ХМАО-Югры, реализующая полный цикл бронирования билетов от выбора рейса до электронной регистрации через QR-код. Проект разработан с упором на удобство региональных пассажиров и включает: симуляцию бронирования с генерацией билетов, эмуляцию платежного шлюза, адаптивный интерфейс и современную систему онлайн-регистрации. Решение демонстрирует комплексный подход к цифровизации локальных авиаперевозок с использованием актуальных веб-технологий и ориентированным на пользователя дизайном.</p> */}
                     </div>
                   </div>
@@ -1123,7 +1181,7 @@ Bruk
             </a>
 
             <a href="mailto:urkabestyzhev@gmail.com?subject=Идея!&body=Здравствуйте! Давай кое-что обсудим..." target="_blank" rel="noopener noreferrer" className={`cursorHoverBig ${MuseoModernoT.className} ${contacts.contacts__link}`}>urkabestyzhev@gmail.com</a>
-                    
+
           </div>
 
         </div>
