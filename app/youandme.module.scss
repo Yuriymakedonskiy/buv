@@ -7,10 +7,10 @@ $white: #fff;
     background-color: $red;
     z-index: 1;
     position: relative;
-    padding-bottom: 10em;
+    padding-block: 10em;
 
     @include for-laptop {
-        padding-bottom: 5em;
+        padding-block: 5em;
     }
 
     &__inner {

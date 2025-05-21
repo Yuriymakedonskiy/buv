@@ -793,7 +793,13 @@ const introSound = useRef(null);
               <div className={`${styles.banner__text}`}>
                 <div className={`${SignikaT.className}  ${styles.banner__left}`}>
                   {/* <p className={`banner__headerlogo`}> */}
-                  Bestuzhev
+                  <Image
+                    className={`cursorHoverBig ${styles.banner__logo}`}
+                    src="/3.svg"
+                    width={209}
+                    height={30}
+                    alt="Логотиа"
+                  />
                   {/* </p> */}
                 </div>
                 <div className={`cursorHoverBig ${styles.banner__link} ${styles.banner__link_journal}`}
@@ -921,9 +927,9 @@ const introSound = useRef(null);
                 <h4 className={`${stack.stack__scroll_anim}  ${stack.stack__title}`}>Stack</h4>
                 <p className={`stack__float ${stack.stack__float}`}>
                   <span className={` ${stack.stack__buv}`}>
-                    buv
+                 сайт создан на next
                   </span>
-                  создан на next.js</p>
+                  </p>
               </div>
               <div className={`stack__body ${stack.stack__scroll_anim} ${stack.stack__body}`}>
                 <h5 className={`${stack.stack__subtitle}`}>Frontend</h5>
