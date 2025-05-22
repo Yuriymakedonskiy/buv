@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@use './mixins' as *;
 $red: #D12727;
 $white: #fff;
 

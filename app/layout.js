@@ -1,4 +1,6 @@
 import "./normalize.scss";
+import Script from 'next/script';
+
 export const metadata = {
   title: "Разработка сайтов, приложений и ботов | Цифровые продукты под ключ",
   description: "Разрабатываю сайты, мобильные приложения и чат-ботов под ключ. Полный цикл: от идеи до запуска и поддержки",
@@ -6,40 +8,37 @@ export const metadata = {
   openGraph: {
     title: "Разработка сайтов, приложений и ботов | Цифровые продукты под ключ",
     description: "Разрабатываю сайты, мобильные приложения и чат-ботов под ключ. Полный цикл: от идеи до запуска и поддержки",
-    image: "/buv.jpg", // Укажите путь к изображению для OG
-    url: "https://buvbuvbuv.ru", // Укажите ваш URL
+    images: ["/buv.jpg"], // обратите внимание: массив, как требует spec
+    url: "https://buvbuvbuv.ru",
     type: "website",
   },
 };
+
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords}/>
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta property="og:description" content={metadata.openGraph.description} />
-        <meta property="og:image" content={metadata.openGraph.image} />
-        <meta property="og:url" content={metadata.openGraph.url} />
-        <meta property="og:type" content={metadata.openGraph.type} />
-        <title>{metadata.title}</title>
-
         <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
         <link rel="shortcut icon" href="/favicon/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
         <link rel="manifest" href="/favicon/site.webmanifest" />
+      </head>
+      <body>
+        {children}
 
-        <script
-          type="text/javascript"
+        <Script
+          strategy="afterInteractive"
+          src="https://mc.yandex.ru/metrika/tag.js"
+        />
+        <Script
+          id="yandex-metrika"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function(m,e,t,r,i,k,a){
-                m[i]=m[i]||function(){
-                  (m[i].a=m[i].a||[]).push(arguments)
-                };
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                 m[i].l=1*new Date();
                 for (var j = 0; j < document.scripts.length; j++) {
                   if (document.scripts[j].src === r) { return; }
@@ -61,17 +60,10 @@ export default function RootLayout({ children }) {
         />
         <noscript>
           <div>
-            <img
-              src="https://mc.yandex.ru/watch/99528212"
-              style={{ position: 'absolute', left: '-9999px' }}
-              alt=""
-            />
+            <img src="https://mc.yandex.ru/watch/99528212" style={{ position: 'absolute', left: '-9999px' }} alt="" />
           </div>
         </noscript>
-        {/* /Yandex.Metrika */}
-      </head>
-      <body>
-        {children}
+
       </body>
     </html>
   );

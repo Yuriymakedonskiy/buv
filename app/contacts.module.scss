@@ -1,8 +1,6 @@
-@import './mixins.scss';
+@use './mixins' as *;
 $red: #D12727;
 $white: #fff;
-
-.footer {}
 
 .prevBlock {
     margin-bottom: 100vh;
@@ -26,12 +24,7 @@ $white: #fff;
     &__inner {
         display: flex;
         position: relative;
-        // text-align: center;
-        // flex-direction: column;
         height: 100%;
-        // justify-content: center;
-        
-        
         .contacts__title {
             letter-spacing: -0.06em;
             color: $white;
@@ -56,7 +49,6 @@ $white: #fff;
                     scale: 1.7;
 
                 } 
-                // color: ;
             }
         }
         .contacts__link {

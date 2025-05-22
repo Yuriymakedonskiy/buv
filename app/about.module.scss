@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@use './mixins' as *;
 $red: #D12727;
 $white: #fff;
 
@@ -22,7 +22,7 @@ $white: #fff;
         }
 
         @include for-mobile {
-        flex-direction: column;
+            flex-direction: column;
         }
     }
 
@@ -33,7 +33,6 @@ $white: #fff;
         display: flex;
         flex-direction: column;
         z-index: 9;
-
         margin-block: 3em;
 
         &:after {
@@ -49,25 +48,21 @@ $white: #fff;
             transform: scale(var(--scale));
             opacity: var(--opacity);
             transition: transform 0.3s ease, opacity 0.3s ease;
-            
-            @include for-mobile {
-            width: 80vw;
 
-            left: 50%;
-            transform: translateX(-50%);
-        }
+            @include for-mobile {
+                width: 80vw;
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
 
         &:hover::before {
             content: "Чапаев ждёт вас в Telegram!";
             scale: .9;
             transition: all 0.4s ease;
+
             @include for-mobile {
                 font-size: .8em;
-                // right: 20vw;
-
-                // right: 30%;
-                // transform: translateX(10%);
             }
         }
 
@@ -94,7 +89,6 @@ $white: #fff;
             @include for-mobile {
                 font-size: .8em;
                 right: 20vw;
-                // transform: translateX(50%);
             }
         }
     }
@@ -103,11 +97,10 @@ $white: #fff;
         z-index: -10;
         width: 21vw;
         border-radius: 1em;
-        
+
         @include for-mobile {
 
             width: 70vw;
-            // margin-right: -50%;
             transform: translateX(20%);
         }
     }
@@ -130,21 +123,19 @@ $white: #fff;
         line-height: 120%;
         letter-spacing: -.05em;
         z-index: 200;
-        
+
         @include for-laptop {
             padding: 0.4em .5em;
             font-size: 2em;
             margin-right: 0em;
         }
-        
+
         @include for-mobile {
             padding-inline: 0.4em;
-            // padding: 0.4em 1em;
             max-width: 100%;
-            // padding: 0.4em .5em 0.4em 0em;
             font-size: 1.7em;
         }
-        
+
         &::before {
             content: '';
             position: absolute;
@@ -156,14 +147,6 @@ $white: #fff;
             background: url('../public/agnelli.jpg') no-repeat center/cover;
             filter: brightness(var(--brightness)) opacity(var(--opacity));
             pointer-events: none;
-            
-            @include for-mobile {
-                // background-position: 10%;
-                // margin-top: -100px;
-                // height: 140%;
-
-            }
-
         }
     }
 

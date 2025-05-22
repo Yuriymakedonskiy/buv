@@ -35,9 +35,6 @@ const models = [
 ];
 
 
-
-
-
 export default function Home() {
   const cursorRef = useRef(null);
   const imageContainerRef = useRef(null);
@@ -74,15 +71,6 @@ export default function Home() {
     return () => {
       lenis.destroy(); // Удалить при размонтировании компонента
     };
-  }, []);
-
-useEffect(() => {
-    gsap.from(headerRef.current, {
-      y: -200,        // сдвиг сверху
-      opacity: 0,     // из полной прозрачности
-      duration: 4,    // длительность анимации
-      ease: 'power4.out',
-    });
   }, []);
 
 
@@ -122,10 +110,16 @@ const introSound = useRef(null);
     }
   };
 
+const [isClient, setIsClient] = useState(false);
 
+  // useEffect для "разрешения" клиентской логики
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const ScrollStack = (e) => {
     e.preventDefault();
+    if (!isClient) return;
     const el = document.getElementById("stack");
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -134,19 +128,19 @@ const introSound = useRef(null);
 
   const ScrollProjects = (e) => {
     e.preventDefault();
+    if (!isClient) return;
     const el = document.getElementById("projects");
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-
   const playAudioDali = () => {
+    if (!isClient) return;
     if (daliSound.current) {
       daliSound.current.play();
     }
   };
-
 
   useEffect(() => {
     if (isOpenJournal) {
@@ -601,9 +595,13 @@ const introSound = useRef(null);
 
   return (
     <main>
+
       <audio ref={daliSound} className={`daliSound ${styles.daliSound}`} src="/audio/dali.mp3" preload="auto" />
       <audio ref={agnelliSound} className={`${styles.agnelliSound}`} src="/audio/agnelli.mp3"></audio>
+     {isClient && (
+      
       <audio ref={introSound} className={`${styles.introSound}`} src="/audio/intro.mp3"></audio>
+      )}
       <div
         ref={cursorRef}
         style={{
@@ -739,7 +737,7 @@ const introSound = useRef(null);
               youtube
               <div className={`${styles.banner__link_svg}`}>
                 <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </a>
@@ -749,7 +747,7 @@ const introSound = useRef(null);
               tiktok
               <div className={`${styles.banner__link_svg}`}>
                 <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </a>
@@ -759,7 +757,7 @@ const introSound = useRef(null);
               instagram
               <div className={`${styles.banner__link_svg}`}>
                 <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </a>
@@ -829,7 +827,7 @@ const introSound = useRef(null);
                   <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
                     Контакт                <div className={`${styles.banner__link_svg}`}>
                       <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                   </a>
@@ -1029,7 +1027,7 @@ const introSound = useRef(null);
                         className={` ${projects.projects__title} ${projects.projects__ets}`}>ЭТС
                         <div className={`${projects.projects__svg}`}>
                           <svg width="1em" height='1em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </div>
                       </a>
@@ -1156,7 +1154,7 @@ const introSound = useRef(null);
                       <h2 className={`${projects.projects__title} ${projects.projects__title_slejka}`}>Прозрачность работы
                         {/* <div className={`${projects.projects__svg}`}> */}
                         <svg width="1em" height='1em' viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                         {/* </div> */}
                       </h2>
@@ -1185,7 +1183,7 @@ const introSound = useRef(null);
             </Canvas>
             <a href="mailto:urkabestyzhev@gmail.com?subject=Идея!&body=Здравствуйте! Давай кое-что обсудим..." target="_blank" rel="noopener noreferrer" className={`cursorHoverBig ${MuseoModernoT.className} ${contacts.contacts__email}`}>Связаться
               <svg width=".4em" height='1em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
 

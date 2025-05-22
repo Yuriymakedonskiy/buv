@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@use './mixins' as *;
 $red: #D12727;
 $white: #fff;
 
@@ -30,12 +30,7 @@ $white: #fff;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 3rem;
-        @include for-mobile {
-            // flex-direction: column;
-            // justify-content:left;
-            // align-items:flex-start;
-        }
-    }
+      }
 
     &__float {
         font-size: 1em;

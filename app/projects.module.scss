@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@use './mixins' as *;
 $red: #D12727;
 $white: #fff;
 
@@ -145,7 +145,6 @@ $white: #fff;
 
                 @include for-mobile {
                     width: 100%;
-                    // padding-inline: 2vw;
                 }
             }
 
@@ -180,8 +179,6 @@ $white: #fff;
 
         }
     }
-
-    &__item_slejka {}
 
     &__link {
         opacity: 0;
@@ -232,8 +229,6 @@ $white: #fff;
     &__title_slejka {
         font-size: 5vw;
         position: relative;
-
-        &:after {}
     }
 
     &__subtitle_slejka {
@@ -307,9 +302,7 @@ $white: #fff;
 
 .projects__slejka {
     font-size: 2em;
-
     font-weight: 500;
-    // transform: translate(-50%,-50%);
     color: #11181e;
 }
 

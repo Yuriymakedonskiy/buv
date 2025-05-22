@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@use './mixins' as *;
 $red: #D12727;
 $white: #fff;
 
@@ -23,7 +23,6 @@ $white: #fff;
     width: 100vw;
 
     &__logo {
-
         max-width: 200px;
         width: 15vw;
     }
@@ -48,25 +47,13 @@ $white: #fff;
     &__body {
         margin: 0.4em;
         padding: 0.4em 1em;
-
         @include for-laptop {
             padding: 0.4em .5em;
         }
-
-        @include for-tablet {}
     }
 
     &__left {
         letter-spacing: 1px;
-
-        @include for-laptop {
-            font-size: .35em;
-        }
-
-        @include for-mobile {
-            font-size: 3vw;
-        }
-
         font-size: .5em;
 
         @include for-laptop {
@@ -76,14 +63,6 @@ $white: #fff;
         @include for-mobile {
             font-size: 3vw;
         }
-
-        // @include for-laptop {
-        //     font-size: .9em;
-        // }
-
-        // @include for-mobile {
-        //     font-size: 6vw;
-        // }
     }
 
     &__header {
@@ -173,11 +152,6 @@ $white: #fff;
                 display: none;
             }
         }
-
-
-        // @include for-mobile {
-        //     font-size: 3vw;
-        // }
     }
 
 
@@ -211,15 +185,11 @@ $white: #fff;
         line-height: 120%;
         color: #fafafa;
         width: 18em;
-
         flex-direction: column;
         display: flex;
         position: relative;
         align-items: end;
         justify-items: center;
-
-
-
 
         .banner__dali_img {
             opacity: 0;
@@ -232,11 +202,8 @@ $white: #fff;
             @include for-laptop {
                 width: 100%;
             }
-
-
-
         }
-
+        
         p {
             line-height: 130%;
         }
@@ -257,7 +224,6 @@ $white: #fff;
             font-size: 4vw;
         }
     }
-
 
     .banner__intro {
         color: #D12727;
@@ -288,22 +254,6 @@ $white: #fff;
         flex-direction: column;
         justify-content: end;
         gap: .2em;
-
-        // font-size: 1em;
-
-        // @include for-laptop {
-        //     font-size: 0.85em;
-        // }
-
-        // @include for-tablet {
-        //     right: 0;
-        //     left: .5em;
-        // }
-
-        // @include for-mobile {
-        //     font-size: 6vw;
-        // }
-
         span {
             font-size: 1em;
 
@@ -320,26 +270,12 @@ $white: #fff;
             text-align: center;
             text-transform: uppercase;
 
-            @include for-laptop {
-                // font-size: 0.35em;
-            }
-
-            // @include for-tablet {
-            //     text-align: left;
-            // }
-
-            @include for-mobile {}
         }
     }
 }
 
 .journal {
-    // background-color: #000000;
-    // z-index: 99999;
     position: absolute;
-    // width: 100vw;
-    // height: 100vh;
-
 }
 
 .journal__popup {
@@ -348,13 +284,10 @@ $white: #fff;
     left: 0;
     scale: 0;
     background-color: #11181e;
-    // z-index: 99999;
     width: 100vw;
     height: 100vh;
     display: flex;
     overflow: hidden;
-
-    // visibility: hidden;
     opacity: 0;
     transition: opacity 0.5s, scale 0.5s;
 }
@@ -372,10 +305,8 @@ $white: #fff;
 .journal__img {
     position: absolute;
     max-width: 7em;
-    // opacity: 0.2;
     transition: transform 0.4s ease-out;
-
-    // mix-blend-mode;
+    
     @include for-mobile {
         max-width: 18vw;
 
@@ -479,14 +410,10 @@ $white: #fff;
 }
 
 .brukLogo {
-    // position: absolute;
     max-width: 12em;
     padding-block: 15px;
-    // opacity: 0.2;
     transition: transform 0.4s ease-out;
-
-    // mix-blend-mode;
-    @include for-mobile {
+       @include for-mobile {
         max-width: 18vw;
 
     }
