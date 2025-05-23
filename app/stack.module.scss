@@ -7,12 +7,10 @@ $white: #fff;
     z-index: 1;
     position: relative;
     color: #fff;
-    padding-top: 10em;
-    padding-bottom: 14em;
+    padding-block: 10em;
 
     @include for-laptop {
-        padding-top: 5em;
-        padding-bottom: 11em;
+        padding-block: 5em;
     }
 
     &__inner {
@@ -45,11 +43,12 @@ $white: #fff;
     }
 
     &__title {
-        letter-spacing: -0.06em;
+        letter-spacing: -0.05em;
         color: $white;
+        color: #D12727;
         position: relative;
         font-size: 8em;
-        font-weight: 100;
+        font-weight: 900;
         transition: .4s ease;
         text-transform: uppercase;
 
@@ -65,16 +64,15 @@ $white: #fff;
         position: relative;
     }
 
-    &__scroll_anim {}
 
     &__subtitle {
-        letter-spacing: -0.06em;
+        letter-spacing: -0.03em;
         color: $white;
         line-height: 120%;
         position: relative;
         font-size: 3em;
-        padding-bottom: .7em;
-        font-weight: 100;
+        padding-bottom: .3em;
+        font-weight: 400;
         transition: .4s ease;
         text-transform: uppercase;
     }
@@ -82,21 +80,21 @@ $white: #fff;
     &__front,
     &__back {
         display: flex;
-        font-size: 1.2em;
+        font-size: 1.33em;
         width: 85%;
         flex-wrap: wrap;
-        font-weight: 100;
-        gap: 1em;
-        padding-bottom: 4em;
+        font-weight: 200;
+        gap: .8em;
+        padding-bottom: 3em;
         transition: .4s ease;
         text-transform: uppercase;
     }
 
     &__buv {
-        color: #D12727;
+        // color: #D12727;
         margin-right: .4em;
-        font-weight: 400;
-        font-style: italic;
+        font-weight: 200;
+        // font-style: italic;
     }
 
     &__saying {

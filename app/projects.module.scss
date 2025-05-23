@@ -5,12 +5,15 @@ $white: #fff;
 .projects {
     background: rgb(230, 230, 230);
     color: #11181e;
-    padding-top: 14em;
+    padding-top: 25em;
     z-index: 1;
     position: relative;
 
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+
     @include for-mobile {
-        padding-top: 9em;
+        padding-top: 12em;
     }
 
     &__inner {
@@ -283,8 +286,9 @@ $white: #fff;
 .contacts__carousel {
     display: flex;
     overflow: hidden;
+    z-index: -999;
     position: absolute;
-    top: -7em;
+    top: 5em;
 }
 
 .contacts__wrapper {
@@ -294,10 +298,11 @@ $white: #fff;
 .contacts__text {
     white-space: nowrap;
     font-size: 10em;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: $red;
+
 }
 
 .projects__slejka {

@@ -47,6 +47,7 @@ $white: #fff;
     &__body {
         margin: 0.4em;
         padding: 0.4em 1em;
+
         @include for-laptop {
             padding: 0.4em .5em;
         }
@@ -139,9 +140,12 @@ $white: #fff;
         position: absolute;
         left: 50%;
         top: 50%;
+        // transition: 0.4s all;
+        
         transform: translate(-50%, -50%);
         color: #D12727;
 
+        
         @include for-laptop {
             position: relative;
             left: 0%;
@@ -203,7 +207,7 @@ $white: #fff;
                 width: 100%;
             }
         }
-        
+
         p {
             line-height: 130%;
         }
@@ -254,6 +258,7 @@ $white: #fff;
         flex-direction: column;
         justify-content: end;
         gap: .2em;
+
         span {
             font-size: 1em;
 
@@ -306,7 +311,7 @@ $white: #fff;
     position: absolute;
     max-width: 7em;
     transition: transform 0.4s ease-out;
-    
+
     @include for-mobile {
         max-width: 18vw;
 
@@ -413,7 +418,8 @@ $white: #fff;
     max-width: 12em;
     padding-block: 15px;
     transition: transform 0.4s ease-out;
-       @include for-mobile {
+
+    @include for-mobile {
         max-width: 18vw;
 
     }

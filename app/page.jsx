@@ -104,7 +104,7 @@ const introSound = useRef(null);
     }
 
     audio.play()
-    const el = document.getElementById("about");
+    const el = document.getElementById("projects");
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
@@ -854,7 +854,7 @@ const [isClient, setIsClient] = useState(false);
               <div ref={banner__end} className={`${styles.banner__end}`}>
                 <div className={`${styles.banner__info}`}>
                 <p className={`cursorHover  ${styles.banner__intro}`} onClick={playIntro}>послушай интро</p>
-                цифровые продукты под ключ  <p>
+                разработка под ключ  <p>
                              
                              <span>
                                   САЙТ / ПРИЛОЖЕНИЕ / БОТ
@@ -865,119 +865,14 @@ const [isClient, setIsClient] = useState(false);
               </div>
             </div>
           </div>
-
         </div>
-        <div ref={aboutRef} className={`${SignikaT.className}`}>
-          <div  id="about" className={`about ${about.about}`}>
 
-            <div className={`${about.about__inner}`}>
-              <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
-                <div className={`cursorHoverBig about__photo ${about.about__photo}`}>
-                  <Image
-                    className={`${about.about__im}`}
-                    src="/im.png"
-                    width={250}
-                    height={200}
-                    alt="Юрий Бестужев"
-                  />
-                </div>
-              </a>
-
-              <div
-                ref={about__text_anim}
-                className={`white_text about__text about__text_anim ${about.about__text}`}>
-                <p>
-                  Digital developer, работаю удалённо, подхожу к делу с тем же вкусом и вниманием к деталям, как Джанни Аньелли выбирал свои рубашки.
-                </p>
-                <p className={`about__saying ${about.about__saying}`}>
-                  'Стиль это всё' — закон Аньелли. Наведи и убедись.
-                </p>
-                <p>
-                  Мои мобильные приложения, сайты и боты не только хорошо выглядят — они приносят результат. Люди возвращаются ко мне, потому что всё просто работает.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className={`skills ${SignikaT.className} ${skills.skills}`}>
-            <div className={`${skills.skills__inner}`}>
-              <h2 className={`skills__title ${skills.skills__title}`}>
-                YOU AND ME
-              </h2>
-              <ul className={`skills__list ${skills.skills__list}`}>
-                <li data-text="Придумаем концепцию, которая выделит ваш продукт" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
-                  Придумаем
-                </li>
-                <li data-text="Создадим уникальное решение для вашего проекта" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
-                  создадим
-                </li>
-                <li data-text="Реализуем ваши идеи в реальность и доведем до результата" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
-                  РЕАЛИЗУЕМ
-                </li>
-                <li data-text="Внедрим передовые технологии в ваш бизнес" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
-                  внедрим
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div id="stack" className={`stack ${stack.stack}`}>
-            <div className={` ${SignikaT.className} ${stack.stack__inner}`}>
-              <div className={`${stack.stack__header}`}>
-                <h4 className={`${stack.stack__scroll_anim}  ${stack.stack__title}`}>Stack</h4>
-                <p className={`stack__float ${stack.stack__float}`}>
-                  <span className={` ${stack.stack__buv}`}>
-                 сайт создан на next
-                  </span>
-                  </p>
-              </div>
-              <div className={`stack__body ${stack.stack__scroll_anim} ${stack.stack__body}`}>
-                <h5 className={`${stack.stack__subtitle}`}>Frontend</h5>
-                <ul className={`${stack.stack__front}`}>
-                  <li>react.js</li>
-                  <li>react native</li>
-                  <li>next</li>
-                  <li>typescript</li>
-                  <li>gsap</li>
-                  <li>three</li>
-                  <li>bem</li>
-                  <li>sass</li>
-                  <li>css modules</li>
-                  <li>jquery</li>
-                </ul>
-                <h5 className={`${stack.stack__subtitle}`}>Backend (API & Admin UI)</h5>
-                <ul className={`${stack.stack__back}`}>
-                  <li>json api</li>
-                  <li>vite</li>
-                  <li>express</li>
-                  <li>rest</li>
-                  <li>turbopack</li>
-                  <li>vercel</li>
-                  <li>mongodb</li>
-                  <li>jwt</li>
-                  <li>ssr</li>
-                  <li>axios</li>
-                  <li>mongoose</li>
-                  <li>ajax</li>
-                  <li>git</li>
-                </ul>
-                <h5 className={`${stack.stack__subtitle}`}>CMS (NO-CODE)</h5>
-                <ul className={`${stack.stack__back}`}>
-                  <li>WEBFLOW</li>
-                  <li>WORDPRESS</li>
-                  <li>TILDA</li>
-                </ul>
-              </div>
-              <div className={` stack__saying ${stack.stack__scroll_anim} ${stack.stack__saying}`}>
-                <p>
-                  'Cambiano gli strumenti, l’obiettivo resta lo stesso' <br /> — Итальянская поговорка
-                </p>
-              </div>
-            </div>
-          </div>
+          
           <div className={`${contacts.footer}`}>
-            <div id="projects" className={`projects ${contacts.prevBlock} ${SignikaT.className}  ${projects.projects}`}>
+            <div id="projects" className={`projects ${SignikaT.className}  ${projects.projects}`}>
               <div className={`contacts__carousel ${MuseoModernoT.className} ${projects.contacts__carousel}`}>
                 <div className={`contacts__wrapper ${projects.contacts__wrapper}`}>
-                  <span className={`contacts__text ${projects.contacts__text}`}>Код Дизайн План Идея Сайт Бренд Ресурс Проект Тест Контент Запуск Продукт Интерфейс Модуль Задача</span>
+                  <span className={`contacts__text ${projects.contacts__text}`}>Код Дизайн План Идея Сайт Бренд Ресурс Проект Тест Контент Запуск Продукт Модуль Задача</span>
                 </div>
               </div>
               <div className={`${projects.projects__inner}`}>
@@ -1172,6 +1067,118 @@ const [isClient, setIsClient] = useState(false);
           </div>
         </div>
 
+
+
+          <div id="stack" className={`stack ${stack.stack}`}>
+            <div className={` ${SignikaT.className} ${stack.stack__inner}`}>
+              <div className={`${stack.stack__header}`}>
+                <h4 className={`${stack.stack__scroll_anim}  ${stack.stack__title}`}>Stack</h4>
+                <p className={`stack__float ${stack.stack__float}`}>
+                  <span className={` ${stack.stack__buv}`}>
+                 сайт создан на next
+                  </span>
+                  </p>
+              </div>
+              <div className={`stack__body ${stack.stack__scroll_anim} ${stack.stack__body}`}>
+                <h5 className={`${stack.stack__subtitle}`}>Frontend</h5>
+                <ul className={`${stack.stack__front}`}>
+                  <li>react.js</li>
+                  <li>react native</li>
+                  <li>next</li>
+                  <li>typescript</li>
+                  <li>gsap</li>
+                  <li>three</li>
+                  <li>bem</li>
+                  <li>sass</li>
+                  <li>css modules</li>
+                  <li>jquery</li>
+                </ul>
+                <h5 className={`${stack.stack__subtitle}`}>Backend (API & Admin UI)</h5>
+                <ul className={`${stack.stack__back}`}>
+                  <li>json api</li>
+                  <li>vite</li>
+                  <li>express</li>
+                  <li>rest</li>
+                  <li>turbopack</li>
+                  <li>vercel</li>
+                  <li>mongodb</li>
+                  <li>jwt</li>
+                  <li>ssr</li>
+                  <li>axios</li>
+                  <li>mongoose</li>
+                  <li>ajax</li>
+                  <li>git</li>
+                </ul>
+                <h5 className={`${stack.stack__subtitle}`}>CMS (NO-CODE)</h5>
+                <ul className={`${stack.stack__back}`}>
+                  <li>WEBFLOW</li>
+                  <li>WORDPRESS</li>
+                  <li>TILDA</li>
+                </ul>
+              </div>
+              <div className={` stack__saying ${stack.stack__scroll_anim} ${stack.stack__saying}`}>
+                <p>
+                  'Cambiano gli strumenti, l’obiettivo resta lo stesso' <br /> — Итальянская поговорка
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+        <div ref={aboutRef} className={`${SignikaT.className}`}>
+          <div id="about" className={`about ${about.about}`}>
+                <h4 className={` ${about.about__title}`}>ОБО МНЕ</h4>
+
+            <div className={`${about.about__inner}`}>
+              <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
+                <div className={`cursorHoverBig about__photo ${about.about__photo}`}>
+                  <Image
+                    className={`${about.about__im}`}
+                    src="/im.png"
+                    width={250}
+                    height={200}
+                    alt="Юрий Бестужев"
+                  />
+                </div>
+              </a>
+
+              <div
+                ref={about__text_anim}
+                className={`white_text about__text about__text_anim ${about.about__text}`}>
+                <p>
+                  Digital developer, работаю удалённо, подхожу к делу с тем же вкусом и вниманием к деталям, как Джанни Аньелли выбирал свои рубашки.
+                </p>
+                <p className={`about__saying ${about.about__saying}`}>
+                  'Стиль это всё' — закон Аньелли. Наведи и убедись.
+                </p>
+                <p>
+                  Мои мобильные приложения, сайты и боты не только хорошо выглядят — они приносят результат. Люди возвращаются ко мне, потому что всё просто работает.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className={`skills ${SignikaT.className} ${skills.skills} ${contacts.prevBlock}`}>
+            <div className={`${skills.skills__inner}`}>
+              <h2 className={`skills__title ${skills.skills__title}`}>
+                YOU AND ME
+              </h2>
+              <ul className={`skills__list ${skills.skills__list}`}>
+                <li data-text="Придумаем концепцию, которая выделит ваш продукт" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                  Придумаем
+                </li>
+                <li data-text="Создадим уникальное решение для вашего проекта" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                  создадим
+                </li>
+                <li data-text="Реализуем ваши идеи в реальность и доведем до результата" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                  РЕАЛИЗУЕМ
+                </li>
+                <li data-text="Внедрим передовые технологии в ваш бизнес" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                  внедрим
+                </li>
+              </ul>
+            </div>
+          </div>
         <div className={`${contacts.contacts}`}>
           <div className={`${contacts.contacts__inner}`}>
             {/* <p className={`${SignikaT.className} ${contacts.contacts__title}`}>Идеи вне времени</p> */}
