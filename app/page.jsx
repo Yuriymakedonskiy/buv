@@ -1093,7 +1093,7 @@ const [isClient, setIsClient] = useState(false);
                   <li>css modules</li>
                   <li>jquery</li>
                 </ul>
-                <h5 className={`${stack.stack__subtitle}`}>Backend (API & Admin UI)</h5>
+                <h5 className={`${stack.stack__subtitle}`}>Backend</h5>
                 <ul className={`${stack.stack__back}`}>
                   <li>json api</li>
                   <li>vite</li>
@@ -1109,7 +1109,7 @@ const [isClient, setIsClient] = useState(false);
                   <li>ajax</li>
                   <li>git</li>
                 </ul>
-                <h5 className={`${stack.stack__subtitle}`}>CMS (NO-CODE)</h5>
+                <h5 className={`${stack.stack__subtitle}`}>CMS</h5>
                 <ul className={`${stack.stack__back}`}>
                   <li>WEBFLOW</li>
                   <li>WORDPRESS</li>

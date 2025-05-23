@@ -88,6 +88,11 @@ $white: #fff;
         padding-bottom: 3em;
         transition: .4s ease;
         text-transform: uppercase;
+        
+        @include for-mobile {
+            font-size: 1em;
+            gap: .5em;
+    }
     }
 
     &__buv {

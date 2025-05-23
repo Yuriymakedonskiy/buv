@@ -12,8 +12,8 @@ $white: #fff;
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
 
-    @include for-mobile {
-        padding-top: 12em;
+    @include for-laptop {
+        padding-top: 5em;
     }
 
     &__inner {
@@ -289,6 +289,10 @@ $white: #fff;
     z-index: -999;
     position: absolute;
     top: 5em;
+    
+    @include for-laptop {
+        top: 1em;
+        }
 }
 
 .contacts__wrapper {
@@ -302,6 +306,10 @@ $white: #fff;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: $red;
+    
+    @include for-laptop {
+          font-size: 2em;
+    }
 
 }
 
