@@ -38,6 +38,12 @@ $white: #fff;
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            
+            
+            @include for-mobile {
+            max-width: 50vw;
+            max-height: 200px;
+     }
         }
     }
 
@@ -192,13 +198,13 @@ $white: #fff;
         transition: opacity 0.4s ease, visibility 0.4s ease;
         font-size: 1.3em;
 
+        @include for-mobile {
+            font-size: 3.3vw;
+        }
         a {
             margin-left: 1em;
             color: $white;
 
-            @include for-mobile {
-                font-size: 3.3vw;
-            }
         }
 
         a:hover {
@@ -239,14 +245,15 @@ $white: #fff;
         line-height: 1.2;
         flex-direction: column;
         content: "введите код и следите за процессом в реальном времени";
-        font-size: 15px;
-        font-weight: 500;
         color: #11181e;
-        letter-spacing: 1;
-        font-weight: 300;
-        width: 70%;
-        margin: 1px auto;
+        // margin: 1px auto;
         transition: 1s all;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        font-size: 1.3em;
+
+        @include for-mobile {
+            font-size: 3.3vw;
+        }
         &:hover{
             color: #fff;
         }

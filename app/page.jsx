@@ -254,76 +254,124 @@ const [isClient, setIsClient] = useState(false);
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
-  useEffect(() => {
-    const cursor = cursorRef.current;
-    // Движение курсора
-    const onMouseMove = (e) => {
+useEffect(() => {
+  const cursor = cursorRef.current;
+  if (!cursor) return;
+
+  // ===== Движение мыши (десктоп) =====
+  const onMouseMove = (e) => {
+    gsap.to(cursor, {
+      x: e.clientX,
+      y: e.clientY,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+  };
+
+  // ===== Касание (тач-устройства) =====
+  const onTouchStart = (e) => {
+    const touch = e.touches[0];
+    if (!touch) return;
+
+    // Переместить курсор
+    gsap.to(cursor, {
+      x: touch.clientX,
+      y: touch.clientY,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+
+    // Увеличить
+    gsap.to(cursor, {
+      scale: 2.5,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+
+    // Вернуть обратно через 300 мс
+    setTimeout(() => {
       gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: .2,
+        scale: 1,
+        duration: 0.3,
         ease: "power2.out",
       });
-    };
-    // Изменение цвета на белом тексте
-    const onMouseEnter = () => {
-      gsap.to(cursor, {
-        backgroundColor: "#fff",
-        scale: 2.5,
-        duration: .2,
-      });
-    };
-    const onMouseEnterBig = () => {
-      gsap.to(cursor, {
-        backgroundColor: "#fff",
-        scale: 23,
-        duration: .2,
-      });
-    };
-    const onMouseEnterAbout = () => {
-      gsap.to(cursor, {
-        scale: 0,
-        duration: .2,
-      });
-    };
-    const onMouseLeave = () => {
-      gsap.to(cursor, {
-        backgroundColor: "white",
-        scale: 1,
-        duration: .2,
-      });
-    };
-    // Навешиваем события на элементы с белым текстом
-    const cursorHoverElements = document.querySelectorAll(".cursorHover");
+    }, 300);
+  };
+
+  // ===== Hover-анимации =====
+  const onMouseEnter = () => {
+    gsap.to(cursor, {
+      backgroundColor: "#fff",
+      scale: 2.5,
+      duration: 0.2,
+    });
+  };
+  const onMouseEnterBig = () => {
+    gsap.to(cursor, {
+      backgroundColor: "#fff",
+      scale: 23,
+      duration: 0.2,
+    });
+  };
+  const onMouseEnterAbout = () => {
+    gsap.to(cursor, {
+      scale: 0,
+      duration: 0.2,
+    });
+  };
+  const onMouseLeave = () => {
+    gsap.to(cursor, {
+      backgroundColor: "white",
+      scale: 1,
+      duration: 0.2,
+    });
+  };
+
+  // Навешиваем события на элементы
+  const cursorHoverElements = document.querySelectorAll(".cursorHover");
+  cursorHoverElements.forEach((el) => {
+    el.addEventListener("mouseenter", onMouseEnter);
+    el.addEventListener("mouseleave", onMouseLeave);
+  });
+
+  const cursorHoverElementsBig = document.querySelectorAll(".cursorHoverBig");
+  cursorHoverElementsBig.forEach((el) => {
+    el.addEventListener("mouseenter", onMouseEnterBig);
+    el.addEventListener("mouseleave", onMouseLeave);
+  });
+
+  const cursorHoverElementsAbout = document.querySelectorAll(".about__text_anim");
+  cursorHoverElementsAbout.forEach((el) => {
+    el.addEventListener("mouseenter", onMouseEnterAbout);
+    el.addEventListener("mouseleave", onMouseLeave);
+  });
+
+  // Добавляем глобальные слушатели
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("touchstart", onTouchStart);
+
+  // Убираем обработчики при размонтировании
+  return () => {
+    window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("touchstart", onTouchStart);
+
     cursorHoverElements.forEach((el) => {
-      el.addEventListener("mouseenter", onMouseEnter);
-      el.addEventListener("mouseleave", onMouseLeave);
+      el.removeEventListener("mouseenter", onMouseEnter);
+      el.removeEventListener("mouseleave", onMouseLeave);
     });
-    const cursorHoverElementsBig = document.querySelectorAll(".cursorHoverBig");
+
     cursorHoverElementsBig.forEach((el) => {
-      el.addEventListener("mouseenter", onMouseEnterBig);
-      el.addEventListener("mouseleave", onMouseLeave);
+      el.removeEventListener("mouseenter", onMouseEnterBig);
+      el.removeEventListener("mouseleave", onMouseLeave);
     });
-    const cursorHoverElementsAbout = document.querySelectorAll(".about__text_anim");
+
     cursorHoverElementsAbout.forEach((el) => {
-      el.addEventListener("mouseenter", onMouseEnterAbout);
-      el.addEventListener("mouseleave", onMouseLeave);
+      el.removeEventListener("mouseenter", onMouseEnterAbout);
+      el.removeEventListener("mouseleave", onMouseLeave);
     });
-    // Следим за движением мыши
-    window.addEventListener("mousemove", onMouseMove);
-    // Убираем обработчики при размонтировании
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      cursorHoverElements.forEach((el) => {
-        el.removeEventListener("mouseenter", onMouseEnter);
-        el.removeEventListener("mouseleave", onMouseLeave);
-      });
-      cursorHoverElementsBig.forEach((el) => {
-        el.removeEventListener("mouseenter", onMouseEnterBig);
-        el.removeEventListener("mouseleave", onMouseLeave);
-      });
-    };
-  }, []);
+  };
+}, []);
+
   // Обработчик наведения
   const handleMouseEnter = (imageSrc) => {
     if (imageRef.current) {
