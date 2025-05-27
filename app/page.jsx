@@ -74,7 +74,7 @@ export default function Home() {
   }, []);
 
 
-useEffect(() => {
+  useEffect(() => {
     gsap.from(headerRef.current, {
       y: -200,        // сдвиг сверху
       opacity: 0,     // из полной прозрачности
@@ -91,7 +91,7 @@ useEffect(() => {
     });
   }, []);
 
-const introSound = useRef(null);
+  const introSound = useRef(null);
   const aboutRef = useRef(null);
 
   const playIntro = () => {
@@ -110,7 +110,7 @@ const introSound = useRef(null);
     }
   };
 
-const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   // useEffect для "разрешения" клиентской логики
   useEffect(() => {
@@ -254,123 +254,123 @@ const [isClient, setIsClient] = useState(false);
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
-useEffect(() => {
-  const cursor = cursorRef.current;
-  if (!cursor) return;
+  useEffect(() => {
+    const cursor = cursorRef.current;
+    if (!cursor) return;
 
-  // ===== Движение мыши (десктоп) =====
-  const onMouseMove = (e) => {
-    gsap.to(cursor, {
-      x: e.clientX,
-      y: e.clientY,
-      duration: 0.2,
-      ease: "power2.out",
-    });
-  };
-
-  // ===== Касание (тач-устройства) =====
-  const onTouchStart = (e) => {
-    const touch = e.touches[0];
-    if (!touch) return;
-
-    // Переместить курсор
-    gsap.to(cursor, {
-      x: touch.clientX,
-      y: touch.clientY,
-      duration: 0.2,
-      ease: "power2.out",
-    });
-
-    // Увеличить
-    gsap.to(cursor, {
-      scale: 2.5,
-      duration: 0.2,
-      ease: "power2.out",
-    });
-
-    // Вернуть обратно через 300 мс
-    setTimeout(() => {
+    // ===== Движение мыши (десктоп) =====
+    const onMouseMove = (e) => {
       gsap.to(cursor, {
-        scale: 1,
-        duration: 0.3,
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.2,
         ease: "power2.out",
       });
-    }, 300);
-  };
+    };
 
-  // ===== Hover-анимации =====
-  const onMouseEnter = () => {
-    gsap.to(cursor, {
-      backgroundColor: "#fff",
-      scale: 2.5,
-      duration: 0.2,
-    });
-  };
-  const onMouseEnterBig = () => {
-    gsap.to(cursor, {
-      backgroundColor: "#fff",
-      scale: 23,
-      duration: 0.2,
-    });
-  };
-  const onMouseEnterAbout = () => {
-    gsap.to(cursor, {
-      scale: 0,
-      duration: 0.2,
-    });
-  };
-  const onMouseLeave = () => {
-    gsap.to(cursor, {
-      backgroundColor: "white",
-      scale: 1,
-      duration: 0.2,
-    });
-  };
+    // ===== Касание (тач-устройства) =====
+    const onTouchStart = (e) => {
+      const touch = e.touches[0];
+      if (!touch) return;
 
-  // Навешиваем события на элементы
-  const cursorHoverElements = document.querySelectorAll(".cursorHover");
-  cursorHoverElements.forEach((el) => {
-    el.addEventListener("mouseenter", onMouseEnter);
-    el.addEventListener("mouseleave", onMouseLeave);
-  });
+      // Переместить курсор
+      gsap.to(cursor, {
+        x: touch.clientX,
+        y: touch.clientY,
+        duration: 0.2,
+        ease: "power2.out",
+      });
 
-  const cursorHoverElementsBig = document.querySelectorAll(".cursorHoverBig");
-  cursorHoverElementsBig.forEach((el) => {
-    el.addEventListener("mouseenter", onMouseEnterBig);
-    el.addEventListener("mouseleave", onMouseLeave);
-  });
+      // Увеличить
+      gsap.to(cursor, {
+        scale: 2.5,
+        duration: 0.2,
+        ease: "power2.out",
+      });
 
-  const cursorHoverElementsAbout = document.querySelectorAll(".about__text_anim");
-  cursorHoverElementsAbout.forEach((el) => {
-    el.addEventListener("mouseenter", onMouseEnterAbout);
-    el.addEventListener("mouseleave", onMouseLeave);
-  });
+      // Вернуть обратно через 300 мс
+      setTimeout(() => {
+        gsap.to(cursor, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }, 300);
+    };
 
-  // Добавляем глобальные слушатели
-  window.addEventListener("mousemove", onMouseMove);
-  window.addEventListener("touchstart", onTouchStart);
+    // ===== Hover-анимации =====
+    const onMouseEnter = () => {
+      gsap.to(cursor, {
+        backgroundColor: "#fff",
+        scale: 2.5,
+        duration: 0.2,
+      });
+    };
+    const onMouseEnterBig = () => {
+      gsap.to(cursor, {
+        backgroundColor: "#fff",
+        scale: 23,
+        duration: 0.2,
+      });
+    };
+    const onMouseEnterAbout = () => {
+      gsap.to(cursor, {
+        scale: 0,
+        duration: 0.2,
+      });
+    };
+    const onMouseLeave = () => {
+      gsap.to(cursor, {
+        backgroundColor: "white",
+        scale: 1,
+        duration: 0.2,
+      });
+    };
 
-  // Убираем обработчики при размонтировании
-  return () => {
-    window.removeEventListener("mousemove", onMouseMove);
-    window.removeEventListener("touchstart", onTouchStart);
-
+    // Навешиваем события на элементы
+    const cursorHoverElements = document.querySelectorAll(".cursorHover");
     cursorHoverElements.forEach((el) => {
-      el.removeEventListener("mouseenter", onMouseEnter);
-      el.removeEventListener("mouseleave", onMouseLeave);
+      el.addEventListener("mouseenter", onMouseEnter);
+      el.addEventListener("mouseleave", onMouseLeave);
     });
 
+    const cursorHoverElementsBig = document.querySelectorAll(".cursorHoverBig");
     cursorHoverElementsBig.forEach((el) => {
-      el.removeEventListener("mouseenter", onMouseEnterBig);
-      el.removeEventListener("mouseleave", onMouseLeave);
+      el.addEventListener("mouseenter", onMouseEnterBig);
+      el.addEventListener("mouseleave", onMouseLeave);
     });
 
+    const cursorHoverElementsAbout = document.querySelectorAll(".about__text_anim");
     cursorHoverElementsAbout.forEach((el) => {
-      el.removeEventListener("mouseenter", onMouseEnterAbout);
-      el.removeEventListener("mouseleave", onMouseLeave);
+      el.addEventListener("mouseenter", onMouseEnterAbout);
+      el.addEventListener("mouseleave", onMouseLeave);
     });
-  };
-}, []);
+
+    // Добавляем глобальные слушатели
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("touchstart", onTouchStart);
+
+    // Убираем обработчики при размонтировании
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchstart", onTouchStart);
+
+      cursorHoverElements.forEach((el) => {
+        el.removeEventListener("mouseenter", onMouseEnter);
+        el.removeEventListener("mouseleave", onMouseLeave);
+      });
+
+      cursorHoverElementsBig.forEach((el) => {
+        el.removeEventListener("mouseenter", onMouseEnterBig);
+        el.removeEventListener("mouseleave", onMouseLeave);
+      });
+
+      cursorHoverElementsAbout.forEach((el) => {
+        el.removeEventListener("mouseenter", onMouseEnterAbout);
+        el.removeEventListener("mouseleave", onMouseLeave);
+      });
+    };
+  }, []);
 
   // Обработчик наведения
   const handleMouseEnter = (imageSrc) => {
@@ -646,9 +646,9 @@ useEffect(() => {
 
       <audio ref={daliSound} className={`daliSound ${styles.daliSound}`} src="/audio/dali.mp3" preload="auto" />
       <audio ref={agnelliSound} className={`${styles.agnelliSound}`} src="/audio/agnelli.mp3"></audio>
-     {isClient && (
-      
-      <audio ref={introSound} className={`${styles.introSound}`} src="/audio/intro.mp3"></audio>
+      {isClient && (
+
+        <audio ref={introSound} className={`${styles.introSound}`} src="/audio/intro.mp3"></audio>
       )}
       <div
         ref={cursorRef}
@@ -858,13 +858,13 @@ useEffect(() => {
 
 
                 <div className={`cursorHover ${styles.banner__link}`}>
-                   <div className={` ${styles.banner__link_journal}`}
-                  onClick={() => setIsOpenJournal(true)}
-                >
-                  <span target="_blank" rel="noopener noreferrer">
-                    ЖУРНАЛ
-                  </span>
-                </div>
+                  <div className={` ${styles.banner__link_journal}`}
+                    onClick={() => setIsOpenJournal(true)}
+                  >
+                    <span target="_blank" rel="noopener noreferrer">
+                      ЖУРНАЛ
+                    </span>
+                  </div>
 
                   <a href="#projects" onClick={ScrollProjects}>
                     Проекты
@@ -901,12 +901,12 @@ useEffect(() => {
 
               <div ref={banner__end} className={`${styles.banner__end}`}>
                 <div className={`${styles.banner__info}`}>
-                <p className={`cursorHover  ${styles.banner__intro}`} onClick={playIntro}>послушай интро</p>
-                разработка под ключ  <p>
-                             
-                             <span>
-                                  САЙТ / ПРИЛОЖЕНИЕ / БОТ
-                             </span>
+                  <p className={`cursorHover  ${styles.banner__intro}`} onClick={playIntro}>послушай интро</p>
+                  разработка под ключ  <p>
+
+                    <span>
+                      САЙТ / ПРИЛОЖЕНИЕ / БОТ
+                    </span>
 
                   </p>
                 </div>
@@ -915,322 +915,330 @@ useEffect(() => {
           </div>
         </div>
 
-          
-          <div className={`${contacts.footer}`}>
-            <div id="projects" className={`projects ${SignikaT.className}  ${projects.projects}`}>
-              <div className={`contacts__carousel ${MuseoModernoT.className} ${projects.contacts__carousel}`}>
-                <div className={`contacts__wrapper ${projects.contacts__wrapper}`}>
-                  <span className={`contacts__text ${projects.contacts__text}`}>Код Дизайн План Идея Сайт Бренд Ресурс Проект Тест Контент Запуск Продукт Модуль Задача</span>
-                </div>
-              </div>
-              <div className={`${projects.projects__inner}`}>
-                <h3 className={`projects__head ${projects.projects__head}`}>ПРОЕКТЫ</h3>
-                <div className="projects__list">
-                  <div className={`cursorHover projects__item ${projects.projects__item}`}
-                    onMouseMove={handleMouseMove}
-                    onMouseEnter={() => handleMouseEnter("/bruk.jpg")}
-                    onMouseLeave={handleMouseLeave}>
-                    <div className={`${projects.projects__row}`}>
 
-                      <h2 className={`${projects.projects__title}`}>
-                        Bruk
-                      </h2>
-                      <p className={` ${projects.projects__text}`}>Мобильное приложение, bot, сервера и БД для бистро</p>
-                      <div className={`${projects.projects__link}`}>
-                        <a
-                          href="/pdf/CoffeeMobile.pdf"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          презентация
-                        </a>
-                      </div>
-                    </div>
-                    <div className={`${projects.projects__description}`}>
-                      <Pincode />
-                    </div>
-                    <div className={`${projects.projects__link}`} style={{ justifyContent: 'center', margin: '-40px auto 20px auto' }}>
-                      Проект на паузе, но посмотреть материал можно введя пинкод
+        <div className={`${contacts.footer}`}>
+          <div id="projects" className={`projects ${SignikaT.className}  ${projects.projects}`}>
+            <div className={`contacts__carousel ${MuseoModernoT.className} ${projects.contacts__carousel}`}>
+              <div className={`contacts__wrapper ${projects.contacts__wrapper}`}>
+                <span className={`contacts__text ${projects.contacts__text}`}>
+                  Разработка Боты Приложения Сайты Магазины Брендинг Визуал Интерфейс Адаптивность Автоматизация Интеграция Запуск Продвижение
+                </span>                </div>
+            </div>
+            <div className={`${projects.projects__inner}`}>
+              <h3 className={`projects__head ${projects.projects__head}`}>ПРОЕКТЫ</h3>
+              <div className="projects__list">
+                <div className={`cursorHover projects__item ${projects.projects__item} ${projects.projects__item_bruk}`}
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={() => handleMouseEnter("/bruk.jpg")}
+                  onMouseLeave={handleMouseLeave}>
+                  <div className={`${projects.projects__row}`}>
 
-                    </div>
-                    <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
-                      <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
+                    <h2 className={`${projects.projects__title} ${projects.projects__bruk} ${MuseoModernoT.className}`}>
+                      Bruk
+                    </h2>
+                    <p className={` ${projects.projects__text} ${projects.projects__text_bruk}`}>Мобильное приложение, bot, сервера и БД для бистро</p>
+                    <div className={`${projects.projects__link}`}>
+                      <a
+                        href="/pdf/CoffeeMobile.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        презентация
+                      </a>
                     </div>
                   </div>
-                  <div className={`cursorHover projects__item ${projects.projects__item}`}
-                    onMouseMove={handleMouseMove}
-                    onMouseEnter={() => handleMouseEnter("/ets1.jpg")}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <div className={`${projects.projects__row}`}>
+                  <div className={`${projects.projects__description}`}>
+                    <Pincode />
+                  </div>
+                  <div className={`${projects.projects__link}`} style={{ justifyContent: 'center', margin: '-40px auto 20px auto' }}>
+                    Проект на паузе, но посмотреть материал можно введя пинкод
+
+                  </div>
+                  <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
+                    <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
+                  </div>
+                </div>
+                <div className={`cursorHover projects__item ${projects.projects__item} ${projects.projects__item_ets}`}
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={() => handleMouseEnter("/ets1.jpg")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <div className={`${projects.projects__row}`}>
+                    <a
+                      href="https://etalontrans.vercel.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={` ${projects.projects__title} ${projects.projects__ets}`}>ЭТС
+                    </a>
+                    <p className={`${projects.projects__text} ${projects.projects__text_ets}`}>Выполнил процесс — от идеи до выгрузки на хостинг </p>
+                    <div className={`${projects.projects__link}`}>
                       <a
                         href="https://etalontrans.vercel.app"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={` ${projects.projects__title} ${projects.projects__ets}`}>ЭТС
-                        <div className={`${projects.projects__svg}`}>
-                          <svg width="1em" height='1em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </div>
+                      >
+                        сайт
                       </a>
-                      <p className={`${projects.projects__text}`}>Выполнил процесс — от идеи до выгрузки на хостинг </p>
-                      <div className={`${projects.projects__link}`}>
-                        <a
-                          href="https://github.com/Yuriymakedonskiy/ETS"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          github
-                        </a>
-                        <a
-                          href="/pdf/ets.pdf"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          презентация
-                        </a>
-                      </div>
-                    </div>
-                    <div className={`${projects.projects__description}`}>
-                      <p>ЭталонТрансСервис. Западная Сибирь. Разработка заняла 3 месяца с переходом с Django на React + MongoDB. Ключевые особенности: интерактивная страница вакансий с уникальной формой подачи резюме, админ-панель для правки контента через MongoDB Compass, автоматическое обновление данных на сайте, система авторизации с автоматическим закрытием сессии. Использованные технологии: Frontend - React (хуки, кастомные компоненты), Backend - Node.js + Express, база данных - MongoDB, деплой - PM2 для управления процессами. Особенность разработки: проведен полный рефакторинг с Django/SQLite3 на MERN-стек после 3 месяцев работы. Результат: создан гибкий CMS-инструмент для заказчика с возможностью самостоятельного управления контентом. Проект был представлен на отраслевом форуме. В подвале сайта размещен мой логотип как разработчика.</p>
-                    </div>
-
-                    <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
-                      <Image loading="lazy" alt="Проект" ref={imageRef} />
+                      <a
+                        href="https://github.com/Yuriymakedonskiy/ETS"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        github
+                      </a>
+                      <a
+                        href="/pdf/ets.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        презентация
+                      </a>
                     </div>
                   </div>
-                  <div className={`cursorHover projects__item ${projects.projects__item}`}
-                    onMouseMove={handleMouseMove}
-                    onMouseEnter={() => handleMouseEnter("/suero.png")}
-                    onMouseLeave={handleMouseLeave}>
-                    <div className={`${projects.projects__row}`}>
-                      <h2 className={`${projects.projects__title}`}>Итан Суэро</h2>
-                      <p className={` ${projects.projects__text}`}>Реализация дизайна Итана Суэро</p>
-                      <div className={`${projects.projects__link}`}>
-                        <a
-                          href="https://www.figma.com/design/Fl0mKet5c01lDvJz7LfWO6/Top-16-Websites-of-2024---Awwwards-(Community)?node-id=0-1&p=f&t=VVMZzv1zCYlNKGT0-0"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          макет
-                        </a>
-                        <a
-                          href="https://github.com/Yuriymakedonskiy/ethan-suero-layout"
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          github
-                        </a>
-                      </div>
-                    </div>
-                    <div className={`${projects.projects__description}`}>
-                      Верстка сайта по макету Итана Суэро (дизайнера с 2 номинациями на Awwwards и 12 наградами CSS Design Awards в категориях UI, UX, Special Kudos и Innovation). Технологии и подходы: SCSS для структурированных стилей, адаптивность на Flexbox и CSS Grid с использованием px, em, rem, vw и кастомных миксинов. Особенности проекта: уникальная типографика с базовым размером шрифта 1vw и относительными единицами em для пропорционального масштабирования, применение функций clamp() и calc() для гибкой типографики, строгое следование методологии BEM. Файловая структура организована с разделением на _normalize.scss, _globals.scss, _mixins.scss, _variables.scss и отдельные файлы для каждого компонента. Результат: pixel-perfect соответствие макету, адаптивный дизайн, демонстрация профессионального владения современными инструментами фронтенд-разработки и работы с премиальным дизайном.
-                    </div>
-                    <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
-                      <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
-                    </div>
+                  <div className={`${projects.projects__description}`}>
+                    <p>ЭталонТрансСервис. Западная Сибирь. Разработка заняла 3 месяца с переходом с Django на React + MongoDB. Ключевые особенности: интерактивная страница вакансий с уникальной формой подачи резюме, админ-панель для правки контента через MongoDB Compass, автоматическое обновление данных на сайте, система авторизации с автоматическим закрытием сессии. Использованные технологии: Frontend - React (хуки, кастомные компоненты), Backend - Node.js + Express, база данных - MongoDB, деплой - PM2 для управления процессами. Особенность разработки: проведен полный рефакторинг с Django/SQLite3 на MERN-стек после 3 месяцев работы. Результат: создан гибкий CMS-инструмент для заказчика с возможностью самостоятельного управления контентом. Проект был представлен на отраслевом форуме. В подвале сайта размещен мой логотип как разработчика.</p>
                   </div>
 
-                  <div className={`cursorHover projects__item ${projects.projects__item}`}
-                    onMouseMove={handleMouseMove}
-                    onMouseEnter={() => handleMouseEnter("/ermitage.jpg")}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <div className={`${projects.projects__row}`}>
-                      <h2 className={` ${projects.projects__title}`}>Эрмитаж</h2>
-                      <p className={` ${projects.projects__text}`}>Адаптивная вёрстка и авторские анимации</p>
-                      <div className={`${projects.projects__link}`}>
-                        <a href="/video/ermitage.mp4" target="_blank">
-                          обзор
-                        </a>
-                        <a
-                          href="https://github.com/Yuriymakedonskiy/hermitage_krasnodar"
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          github
-                        </a>
-                      </div>
-                    </div>
-                    <div className={`${projects.projects__description}`}>
-                      <p>ЖК Эрмитаж в Краснодаре — тестовый проект для веб-студии PIXEL2, который я выполнил в качестве вызова самому себе, несмотря на свою основную специализацию в React/fullstack-разработке. Суть задачи заключалась в чистой реализации без использования сторонних библиотек: адаптивная верстка на SCSS, React-компоненты с хуками и авторские анимации создавались полностью с нуля. Этот опыт наглядно продемонстрировал мою способность выходить за рамки основной специализации и решать нестандартные задачи, создавая оптимизированные и качественные интерфейсы с использованием современных веб-технологий. Проект подтвердил мою универсальность как разработчика и готовность браться за сложные вызовы.
-                      </p>
-                    </div>
-                    <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
-                      <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
+                  <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
+                    <Image loading="lazy" alt="Проект" ref={imageRef} />
+                  </div>
+                </div>
+                <div className={`cursorHover projects__item ${projects.projects__item}`}
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={() => handleMouseEnter("/suero.png")}
+                  onMouseLeave={handleMouseLeave}>
+                  <div className={`${projects.projects__row}`}>
+                    <h2 className={`${projects.projects__title}`}>Итан Суэро</h2>
+                    <p className={` ${projects.projects__text}`}>Реализация дизайна Итана Суэро</p>
+                    <div className={`${projects.projects__link}`}>
+                      <a
+                        href="https://www.figma.com/design/Fl0mKet5c01lDvJz7LfWO6/Top-16-Websites-of-2024---Awwwards-(Community)?node-id=0-1&p=f&t=VVMZzv1zCYlNKGT0-0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        макет
+                      </a>
+                      <a
+                        href="https://github.com/Yuriymakedonskiy/ethan-suero-layout"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        github
+                      </a>
                     </div>
                   </div>
-                  <div className={`cursorHover projects__item ${projects.projects__item}`}
-                    onMouseMove={handleMouseMove}
-                    onMouseEnter={() => handleMouseEnter("/aleydavia.jpg")}
-                    onMouseLeave={handleMouseLeave}>
-                    <div className={`${projects.projects__row}`}>
-                      <h2 className={`${projects.projects__title}`}>Алейдавиа</h2>
-                      <p className={`${projects.projects__text}`}>Полная имитация цикла покупки билетов</p>
-                      <div className={`${projects.projects__link}`}>
-                        <a href="/video/aleydavia.mp4" target="_blank">
-                          обзор
-                        </a>
-                        <a
-                          href="/pdf/aleydavia.pdf"
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          презентация
-                        </a>
-                        <a
-                          href="https://github.com/Yuriymakedonskiy/SPA-BILETS-3.0"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          github
-                        </a>
-                      </div>
-                    </div>
-                    <div className={`${projects.projects__description}`}>
-                      <p>Алейдавиа — цифровая платформа для авиаперевозок ХМАО-Югры, реализующая полный цикл бронирования билетов от выбора рейса до электронной регистрации через QR-код. Проект разработан с упором на удобство региональных пассажиров и включает: симуляцию бронирования с генерацией билетов, эмуляцию платежного шлюза, адаптивный интерфейс и современную систему онлайн-регистрации. Решение демонстрирует комплексный подход к цифровизации локальных авиаперевозок с использованием актуальных веб-технологий и ориентированным на пользователя дизайном.</p>
+                  <div className={`${projects.projects__description}`}>
+                    Верстка сайта по макету Итана Суэро (дизайнера с 2 номинациями на Awwwards и 12 наградами CSS Design Awards в категориях UI, UX, Special Kudos и Innovation). Технологии и подходы: SCSS для структурированных стилей, адаптивность на Flexbox и CSS Grid с использованием px, em, rem, vw и кастомных миксинов. Особенности проекта: уникальная типографика с базовым размером шрифта 1vw и относительными единицами em для пропорционального масштабирования, применение функций clamp() и calc() для гибкой типографики, строгое следование методологии BEM. Файловая структура организована с разделением на _normalize.scss, _globals.scss, _mixins.scss, _variables.scss и отдельные файлы для каждого компонента. Результат: pixel-perfect соответствие макету, адаптивный дизайн, демонстрация профессионального владения современными инструментами фронтенд-разработки и работы с премиальным дизайном.
+                  </div>
+                  <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
+                    <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
+                  </div>
+                </div>
+
+                <div className={`cursorHover projects__item ${projects.projects__item}`}
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={() => handleMouseEnter("/ermitage.jpg")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <div className={`${projects.projects__row}`}>
+                    <h2 className={` ${projects.projects__title}`}>Эрмитаж</h2>
+                    <p className={` ${projects.projects__text}`}>Адаптивная вёрстка и авторские анимации</p>
+                    <div className={`${projects.projects__link}`}>
+                      <a href="/video/ermitage.mp4" target="_blank">
+                        обзор
+                      </a>
+                      <a
+                        href="https://github.com/Yuriymakedonskiy/hermitage_krasnodar"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        github
+                      </a>
                     </div>
                   </div>
-                  <div className={`cursorHover projects__item ${projects.projects__item}`}
-                    onMouseMove={handleMouseMove}
-                    onMouseLeave={handleMouseLeave}>
-
-                    <div className={`${projects.projects__row} ${projects.projects__row_slejka}`}>
-                      <h2 className={`${projects.projects__title} ${projects.projects__title_slejka}`}>Прозрачность работы
-                        {/* <div className={`${projects.projects__svg}`}> */}
-                        <svg width="1em" height='1em' viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        {/* </div> */}
-                      </h2>
-                      <p className={`${projects.projects__subtitle_slejka}`}>введите код и следите за процессом в реальном времени</p>
+                  <div className={`${projects.projects__description}`}>
+                    <p>ЖК Эрмитаж в Краснодаре — тестовый проект для веб-студии PIXEL2, который я выполнил в качестве вызова самому себе, несмотря на свою основную специализацию в React/fullstack-разработке. Суть задачи заключалась в чистой реализации без использования сторонних библиотек: адаптивная верстка на SCSS, React-компоненты с хуками и авторские анимации создавались полностью с нуля. Этот опыт наглядно продемонстрировал мою способность выходить за рамки основной специализации и решать нестандартные задачи, создавая оптимизированные и качественные интерфейсы с использованием современных веб-технологий. Проект подтвердил мою универсальность как разработчика и готовность браться за сложные вызовы.
+                    </p>
+                  </div>
+                  <div className={`${projects.projects__container_img}`} ref={imageContainerRef}>
+                    <Image loading="lazy" src="" alt="Проект" ref={imageRef} />
+                  </div>
+                </div>
+                <div className={`cursorHover projects__item ${projects.projects__item}`}
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={() => handleMouseEnter("/aleydavia.jpg")}
+                  onMouseLeave={handleMouseLeave}>
+                  <div className={`${projects.projects__row}`}>
+                    <h2 className={`${projects.projects__title}`}>Алейдавиа</h2>
+                    <p className={`${projects.projects__text}`}>Полная имитация цикла покупки билетов</p>
+                    <div className={`${projects.projects__link}`}>
+                      <a href="/video/aleydavia.mp4" target="_blank">
+                        обзор
+                      </a>
+                      <a
+                        href="/pdf/aleydavia.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        презентация
+                      </a>
+                      <a
+                        href="https://github.com/Yuriymakedonskiy/SPA-BILETS-3.0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        github
+                      </a>
                     </div>
-                    <div className={`${projects.projects__description}`}>
-                      <Pincode />
+                  </div>
+                  <div className={`${projects.projects__description}`}>
+                    <p>Алейдавиа — цифровая платформа для авиаперевозок ХМАО-Югры, реализующая полный цикл бронирования билетов от выбора рейса до электронной регистрации через QR-код. Проект разработан с упором на удобство региональных пассажиров и включает: симуляцию бронирования с генерацией билетов, эмуляцию платежного шлюза, адаптивный интерфейс и современную систему онлайн-регистрации. Решение демонстрирует комплексный подход к цифровизации локальных авиаперевозок с использованием актуальных веб-технологий и ориентированным на пользователя дизайном.</p>
+                  </div>
+                </div>
+                <div className={`cursorHover projects__item ${projects.projects__item}`}
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}>
 
-                      {/* <p>Алейдавиа — цифровая платформа для авиаперевозок ХМАО-Югры, реализующая полный цикл бронирования билетов от выбора рейса до электронной регистрации через QR-код. Проект разработан с упором на удобство региональных пассажиров и включает: симуляцию бронирования с генерацией билетов, эмуляцию платежного шлюза, адаптивный интерфейс и современную систему онлайн-регистрации. Решение демонстрирует комплексный подход к цифровизации локальных авиаперевозок с использованием актуальных веб-технологий и ориентированным на пользователя дизайном.</p> */}
-                    </div>
+                  <div className={`${projects.projects__row} ${projects.projects__row_slejka}`}>
+                    <h2 className={`${projects.projects__title} ${projects.projects__title_slejka}`}>Прозрачность работы
+                      {/* <div className={`${projects.projects__svg}`}> */}
+                      <svg width="1em" height='1em' viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 18L8.5 15.5M18 6H9M18 6V15M18 6L11.5 12.5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {/* </div> */}
+                    </h2>
+                    <p className={`${projects.projects__subtitle_slejka}`}>введите код и следите за процессом в реальном времени</p>
+                  </div>
+                  <div className={`${projects.projects__description}`}>
+                    <Pincode />
+
+                    {/* <p>Алейдавиа — цифровая платформа для авиаперевозок ХМАО-Югры, реализующая полный цикл бронирования билетов от выбора рейса до электронной регистрации через QR-код. Проект разработан с упором на удобство региональных пассажиров и включает: симуляцию бронирования с генерацией билетов, эмуляцию платежного шлюза, адаптивный интерфейс и современную систему онлайн-регистрации. Решение демонстрирует комплексный подход к цифровизации локальных авиаперевозок с использованием актуальных веб-технологий и ориентированным на пользователя дизайном.</p> */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
 
 
-          <div id="stack" className={`stack ${stack.stack}`}>
-            <div className={` ${SignikaT.className} ${stack.stack__inner}`}>
-              <div className={`${stack.stack__header}`}>
-                <h4 className={`${stack.stack__scroll_anim}  ${stack.stack__title}`}>Stack</h4>
-                <p className={`stack__float ${stack.stack__float}`}>
-                  <span className={` ${stack.stack__buv}`}>
-                 сайт создан на next
-                  </span>
-                  </p>
-              </div>
-              <div className={`stack__body ${stack.stack__scroll_anim} ${stack.stack__body}`}>
-                <h5 className={`${stack.stack__subtitle}`}>Frontend</h5>
-                <ul className={`${stack.stack__front}`}>
-                  <li>react</li>
-                  <li>react native</li>
-                  <li>next</li>
-                  <li>vue</li>
-                  <li>typescript</li>
-                  <li>gsap</li>
-                  <li>three</li>
-                  <li>bem</li>
-                  <li>sass</li>
-                  <li>css modules</li>
-                  <li>jquery</li>
-                </ul>
-                <h5 className={`${stack.stack__subtitle}`}>Backend</h5>
-                <ul className={`${stack.stack__back}`}>
-                  <li>express</li>
-                  <li>mongodb</li>
-                  <li>vite</li>
-                  <li>rest</li>
-                  <li>json api</li>
-                  <li>mongoose</li>
-                  <li>jwt</li>
-                  <li>ssr</li>
-                  <li>axios</li>
-                  <li>ajax</li>
-                </ul>
-                <h5 className={`${stack.stack__subtitle}`}>CMS</h5>
-                <ul className={`${stack.stack__back}`}>
-                  <li>WEBFLOW</li>
-                  <li>WORDPRESS</li>
-                  <li>TILDA</li>
-                </ul>
-              </div>
-              <div className={` stack__saying ${stack.stack__scroll_anim} ${stack.stack__saying}`}>
-                <p>
-                  'Cambiano gli strumenti, l’obiettivo resta lo stesso' <br /> — Итальянская поговорка
-                </p>
-              </div>
+      <div id="stack" className={`stack ${stack.stack}`}>
+        <div className={` ${SignikaT.className} ${stack.stack__inner}`}>
+          <div className={`${stack.stack__header}`}>
+            <h4 className={`${stack.stack__scroll_anim}  ${stack.stack__title}`}>Stack</h4>
+            <p className={`stack__float ${stack.stack__float}`}>
+            
+            </p>
+          </div>
+          <div className={`stack__body ${stack.stack__scroll_anim} ${stack.stack__body}`}>
+          <div className={`${stack.stack__col} `}>
+            <h5 className={`${stack.stack__subtitle}`}>Frontend</h5>
+            <ul className={`${stack.stack__front}`}>
+              <li>react</li>
+              <li>react native</li>
+              <li>next</li>
+              <li>vue</li>
+              <li>typescript</li>
+              <li>gsap</li>
+              <li>three</li>
+              <li>bem</li>
+              <li>sass</li>
+              <li>css modules</li>
+              <li>jquery</li>
+            </ul>
+          </div>
+          <div className={`${stack.stack__col} `}>
+            <h5 className={`${stack.stack__subtitle}`}>Backend</h5>
+            <ul className={`${stack.stack__back}`}>
+              <li>express</li>
+              <li>mongodb</li>
+              <li>vite</li>
+              <li>rest</li>
+              <li>json api</li>
+              <li>mongoose</li>
+              <li>jwt</li>
+              <li>ssr</li>
+              <li>axios</li>
+              <li>ajax</li>
+            </ul>
             </div>
+          <div className={`${stack.stack__col} `}>
+            <h5 className={`${stack.stack__subtitle}`}>CMS</h5>
+            <ul className={`${stack.stack__back}`}>
+              <li>WEBFLOW</li>
+              <li>WORDPRESS</li>
+              <li>TILDA</li>
+            </ul>
+          </div>
           </div>
 
+          <div className={` stack__saying ${stack.stack__scroll_anim} ${stack.stack__saying}`}>
+            <p>
+              'Cambiano gli strumenti, l’obiettivo resta lo stesso' <br /> — Итальянская поговорка
+            </p>
+          </div>
+        </div>
+      </div>
 
 
-        <div ref={aboutRef} className={`${SignikaT.className}`}>
-          <div id="about" className={`about ${about.about}`}>
-                 <Image
-                    className={`cursorHoverBig ${about.about__logo}`}
-                    src="/2.svg"
-                    width={600}
-                    height={50}
-                    alt="Логотип"
-                  /> 
-                
-            <div className={`${about.about__inner}`}>
-              <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
-                <div className={`cursorHoverBig about__photo ${about.about__photo}`}>
-                  <Image
-                    className={`${about.about__im}`}
-                    src="/im.png"
-                    width={250}
-                    height={200}
-                    alt="Юрий Бестужев"
-                  />
-                </div>
-              </a>
 
-              <div
-                ref={about__text_anim}
-                className={`white_text about__text about__text_anim ${about.about__text}`}>
-                <p>
-                  Digital developer, работаю удалённо, подхожу к делу с тем же вкусом и вниманием к деталям, как Джанни Аньелли выбирал свои рубашки.
-                </p>
-                <p className={`about__saying ${about.about__saying}`}>
-                  'Стиль это всё' — закон Аньелли. Наведи и убедись.
-                </p>
-                <p>
-                  Мои мобильные приложения, сайты и боты не только хорошо выглядят — они приносят результат. Люди возвращаются ко мне, потому что всё просто работает.
-                </p>
+      <div ref={aboutRef} className={`${SignikaT.className}`}>
+        <div id="about" className={`about ${about.about}`}>
+          <Image
+            className={`cursorHoverBig ${about.about__logo}`}
+            src="/2.svg"
+            width={600}
+            height={50}
+            alt="Логотип"
+          />
+
+          <div className={`${about.about__inner}`}>
+            <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
+              <div className={`cursorHoverBig about__photo ${about.about__photo}`}>
+                <Image
+                  className={`${about.about__im}`}
+                  src="/im.png"
+                  width={250}
+                  height={200}
+                  alt="Юрий Бестужев"
+                />
               </div>
+            </a>
+
+            <div
+              ref={about__text_anim}
+              className={`white_text about__text about__text_anim ${about.about__text}`}>
+              <p>
+                Digital developer, работаю удалённо, подхожу к делу с тем же вкусом и вниманием к деталям, как Джанни Аньелли выбирал свои рубашки.
+              </p>
+              <p className={`about__saying ${about.about__saying}`}>
+                'Стиль это всё' — закон Аньелли. Наведи и убедись.
+              </p>
+              <p>
+                Мои мобильные приложения, сайты и боты не только хорошо выглядят — они приносят результат. Люди возвращаются ко мне, потому что всё просто работает.
+              </p>
             </div>
           </div>
-          <div className={`skills ${SignikaT.className} ${skills.skills} ${contacts.prevBlock}`}>
-            <div className={`${skills.skills__inner}`}>
-              <h2 className={`skills__title ${skills.skills__title}`}>
-                YOU AND ME
-              </h2>
-              <ul className={`skills__list ${skills.skills__list}`}>
-                <li data-text="Придумаем концепцию, которая выделит ваш продукт" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
-                  Придумаем
-                </li>
-                <li data-text="Создадим уникальное решение для вашего проекта" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
-                  создадим
-                </li>
-                <li data-text="Реализуем ваши идеи в реальность и доведем до результата" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
-                  РЕАЛИЗУЕМ
-                </li>
-                <li data-text="Внедрим передовые технологии в ваш бизнес" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
-                  внедрим
-                </li>
-              </ul>
-            </div>
+        </div>
+        <div className={`skills ${SignikaT.className} ${skills.skills} ${contacts.prevBlock}`}>
+          <div className={`${skills.skills__inner}`}>
+            <h2 className={`skills__title ${skills.skills__title}`}>
+              YOU AND ME
+            </h2>
+            <ul className={`skills__list ${skills.skills__list}`}>
+              <li data-text="Придумаем концепцию, которая выделит ваш продукт" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                Придумаем
+              </li>
+              <li data-text="Создадим уникальное решение для вашего проекта" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                создадим
+              </li>
+              <li data-text="Реализуем ваши идеи в реальность и доведем до результата" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                РЕАЛИЗУЕМ
+              </li>
+              <li data-text="Внедрим передовые технологии в ваш бизнес" className={`cursorHoverBig skills__item ${skills.skills__item}`}>
+                внедрим
+              </li>
+            </ul>
           </div>
+        </div>
         <div className={`${contacts.contacts}`}>
           <div className={`${contacts.contacts__inner}`}>
             {/* <p className={`${SignikaT.className} ${contacts.contacts__title}`}>Идеи вне времени</p> */}

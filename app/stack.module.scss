@@ -12,15 +12,20 @@ $white: #fff;
     @include for-laptop {
         padding-block: 5em;
     }
-
+    
     &__inner {
         display: flex;
         flex-direction: column;
         height: 100%;
         justify-content: center;
-        max-width: 90%;
+        max-width: 70%;
         margin-left: auto;
         margin-right: auto;
+        
+        @include for-mobile {
+                max-width: 90%;
+            }
+
     }
 
     &__header {
@@ -56,12 +61,16 @@ $white: #fff;
             font-size: 5em;
         }
     }
-
+    
     &__body {
         opacity: 0;
         background-color: #11181e;
         z-index: 10;
+        display: flex;
         position: relative;
+        @include for-laptop {
+            display: block;
+        }
     }
 
 
@@ -70,8 +79,8 @@ $white: #fff;
         color: $white;
         line-height: 120%;
         position: relative;
-        font-size: 3em;
-        padding-bottom: .3em;
+        font-size: 2.5em;
+        padding-bottom: .5em;
         font-weight: 400;
         transition: .4s ease;
         text-transform: uppercase;
@@ -80,17 +89,18 @@ $white: #fff;
     &__front,
     &__back {
         display: flex;
-        font-size: 1.33em;
+        font-size: 1.7em;
         width: 85%;
         flex-wrap: wrap;
         font-weight: 300;
-        gap: .8em;
+        gap: .5em;
+        line-height: 1;
         padding-bottom: 3em;
         transition: .4s ease;
-        text-transform: uppercase;
+        text-transform: lowercase;
         
         @include for-mobile {
-            font-size: 1em;
+            font-size: 1.4em;
             gap: .5em;
     }
     }

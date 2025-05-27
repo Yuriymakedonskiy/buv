@@ -3,7 +3,7 @@ $red: #D12727;
 $white: #fff;
 
 .projects {
-    background: rgb(230, 230, 230);
+    background: #fff;
     color: #11181e;
     padding-top: 25em;
     z-index: 1;
@@ -38,20 +38,20 @@ $white: #fff;
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            
-            
+
+
             @include for-mobile {
-            max-width: 50vw;
-            max-height: 200px;
-     }
+                max-width: 50vw;
+                max-height: 200px;
+            }
         }
     }
 
     &__head {
-        font-size: 12em;
+        font-size: 10em;
         padding-inline: 7VW;
         margin-left: -.09em;
-        font-weight: 200;
+        font-weight: 700;
         line-height: 100%;
         padding-bottom: .3em;
         position: relative;
@@ -65,6 +65,7 @@ $white: #fff;
     &__row {
         display: flex;
         justify-content: space-between;
+
         align-items: baseline;
     }
 
@@ -117,13 +118,18 @@ $white: #fff;
         transition: background-color 0.3s ease-out;
         padding-block: 1em;
         padding-inline: 7em;
-        font-weight: 200;
+        font-weight: 300;
         border-top: 1px solid #ccc;
         position: relative;
         overflow: hidden; // Важно для анимации
 
         @include for-laptop {
             padding-inline: 4vw;
+        }
+
+        @include for-mobile {
+        // padding-block: .5em;
+
         }
 
         &:last-child {
@@ -181,13 +187,95 @@ $white: #fff;
                     color: #fff;
                 }
             }
-            .projects__subtitle_slejka{
+
+            .projects__subtitle_slejka {
                 color: #fff;
 
             }
 
         }
     }
+
+    &__item_ets {
+        background-color: #fff;
+        color: #30f;
+
+        .projects__text_ets {
+            font-weight: 600;
+        }
+        .projects__ets {
+            color: #30f;
+            font-weight: 600;
+            position: relative;
+
+            &::after {
+                content: 'сибирь';
+                position: absolute;
+                bottom: 5px;
+                left: 50%;
+                opacity: 1;
+                text-transform: uppercase;
+                font-size: .2em;
+                font-weight: 700;
+                letter-spacing: 0em;
+                line-height: 100%;
+                color: #30f;
+                z-index: 10;
+                // top: 50%;
+                transform: translateX(-50%);
+
+                @include for-mobile {
+                    bottom: -4px;
+
+                }
+            }
+
+        }
+    }
+
+
+    &__item_bruk {
+        background-color: #ffffff;
+        color: #558877;
+
+        .projects__text_bruk {
+            font-weight: 600;
+
+        }
+
+        .projects__bruk {
+            // color: #c5a571;
+            color: #558877;
+            position: relative;
+            font-weight: 600;
+
+
+            &::after {
+                content: 'stavropol';
+                position: absolute;
+                bottom: 5px;
+                left: 50%;
+                opacity: 1;
+                letter-spacing: 0em;
+                line-height: 100%;
+                text-transform: uppercase;
+                font-size: .2em;
+                
+                color: #558877;
+                z-index: 10;
+                // top: 50%;
+                transform: translateX(-50%);
+
+                @include for-mobile {
+                    bottom: -4px;
+
+                }
+
+
+            }
+        }
+    }
+
 
     &__link {
         opacity: 0;
@@ -201,6 +289,7 @@ $white: #fff;
         @include for-mobile {
             font-size: 3.3vw;
         }
+
         a {
             margin-left: 1em;
             color: $white;
@@ -218,7 +307,8 @@ $white: #fff;
         font-size: 6vw;
         line-height: 9vw;
         color: #11181e;
-        font-weight: 200;
+        font-weight: 300;
+
         transition: color 0.3s ease;
         letter-spacing: -.02em;
         white-space: wrap;
@@ -252,9 +342,10 @@ $white: #fff;
         font-size: 1.3em;
 
         @include for-mobile {
-            font-size: 3.3vw;
+            font-size: 2.7vw;
         }
-        &:hover{
+
+        &:hover {
             color: #fff;
         }
     }
@@ -296,10 +387,10 @@ $white: #fff;
     z-index: -999;
     position: absolute;
     top: 5em;
-    
+
     @include for-laptop {
         top: 1em;
-        }
+    }
 }
 
 .contacts__wrapper {
@@ -313,15 +404,15 @@ $white: #fff;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: $red;
-    
+
     @include for-laptop {
-          font-size: 2em;
+        font-size: 2em;
     }
 
 }
 
 .projects__slejka {
-    font-size: 2em;
+    font-size: 1em;
     font-weight: 500;
     color: #11181e;
 }
