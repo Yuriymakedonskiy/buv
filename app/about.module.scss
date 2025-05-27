@@ -8,13 +8,26 @@ $white: #fff;
     padding-top: 0em;
     z-index: 1;
     position: relative;
+    
+        @include for-laptop {
+            padding-block: 5em;
+            padding-top: 0em;
+    
+        }
+
+&__logo{
+    width: 70vw;
+    margin: 0 auto;
+        // width: 15vw;
+}
+
 
     &__title {
         letter-spacing: -0.05em;
         color: #D12727;
         position: relative;
         font-size: 8em;
-        font-weight: 900;
+        font-weight: 500;
         line-height: .8;
         width: 70%;
         text-align: right;
@@ -30,13 +43,18 @@ $white: #fff;
             font-size: 20vw;
             // width: 100%;
         }
+
+    
     }
 
-    @include for-laptop {
-        padding-block: 5em;
-        padding-top: 0em;
+&__title_rotate{
+display: inline-block; /*  Для корректного отображения в строке */
+    transform: scaleX(-1);
+    margin-left: 0;
 
-    }
+}
+
+
 
     &__inner {
         display: flex;

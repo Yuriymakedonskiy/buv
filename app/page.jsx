@@ -844,7 +844,7 @@ useEffect(() => {
                     src="/3.svg"
                     width={209}
                     height={30}
-                    alt="Логотиа"
+                    alt="Логотип"
                   />
                   {/* </p> */}
                 </div>
@@ -1130,9 +1130,10 @@ useEffect(() => {
               <div className={`stack__body ${stack.stack__scroll_anim} ${stack.stack__body}`}>
                 <h5 className={`${stack.stack__subtitle}`}>Frontend</h5>
                 <ul className={`${stack.stack__front}`}>
-                  <li>react.js</li>
+                  <li>react</li>
                   <li>react native</li>
                   <li>next</li>
+                  <li>vue</li>
                   <li>typescript</li>
                   <li>gsap</li>
                   <li>three</li>
@@ -1143,19 +1144,16 @@ useEffect(() => {
                 </ul>
                 <h5 className={`${stack.stack__subtitle}`}>Backend</h5>
                 <ul className={`${stack.stack__back}`}>
-                  <li>json api</li>
-                  <li>vite</li>
                   <li>express</li>
-                  <li>rest</li>
-                  <li>turbopack</li>
-                  <li>vercel</li>
                   <li>mongodb</li>
+                  <li>vite</li>
+                  <li>rest</li>
+                  <li>json api</li>
+                  <li>mongoose</li>
                   <li>jwt</li>
                   <li>ssr</li>
                   <li>axios</li>
-                  <li>mongoose</li>
                   <li>ajax</li>
-                  <li>git</li>
                 </ul>
                 <h5 className={`${stack.stack__subtitle}`}>CMS</h5>
                 <ul className={`${stack.stack__back}`}>
@@ -1176,8 +1174,14 @@ useEffect(() => {
 
         <div ref={aboutRef} className={`${SignikaT.className}`}>
           <div id="about" className={`about ${about.about}`}>
-                <h4 className={` ${about.about__title}`}>ОБО МНЕ</h4>
-
+                 <Image
+                    className={`cursorHoverBig ${about.about__logo}`}
+                    src="/2.svg"
+                    width={600}
+                    height={50}
+                    alt="Логотип"
+                  /> 
+                
             <div className={`${about.about__inner}`}>
               <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
                 <div className={`cursorHoverBig about__photo ${about.about__photo}`}>

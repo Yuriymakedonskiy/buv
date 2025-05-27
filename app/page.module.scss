@@ -223,9 +223,12 @@ $white: #fff;
         font-size: 1em;
         bottom: 3vh;
         transform: translateX(50%);
-
+        
         @include for-laptop {
             font-size: 4vw;
+        }
+        @include for-mobile {
+            bottom: 20vh;
         }
     }
 
@@ -254,7 +257,7 @@ $white: #fff;
     &__info {
         display: flex;
         text-transform: uppercase;
-        font-weight: 100;
+        font-weight: 800;
         flex-direction: column;
         justify-content: end;
         gap: .2em;

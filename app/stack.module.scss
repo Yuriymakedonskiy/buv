@@ -83,7 +83,7 @@ $white: #fff;
         font-size: 1.33em;
         width: 85%;
         flex-wrap: wrap;
-        font-weight: 200;
+        font-weight: 300;
         gap: .8em;
         padding-bottom: 3em;
         transition: .4s ease;
@@ -113,7 +113,7 @@ $white: #fff;
         scale: 0;
         opacity: 0;
         padding-block: 1em;
-        font-weight: 100;
+        font-weight: 200;
         transition: .4s ease;
 
         @include for-laptop {
