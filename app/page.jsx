@@ -45,13 +45,12 @@ export default function Home() {
   const bannerRef = useRef(null);
   const banner__end = useRef(null);
   const daliSound = useRef(null);
-  const isAudioPlayingDali = useRef(false);
+  const stack__poslushat = useRef(null);
+  const uslugiSound = useRef(null);
   const [isOpenJournal, setIsOpenJournal] = useState(false);
   const popupJournalRef = useRef(null);
   const buttonJournalRef = useRef(null);
 
-
-  // window.scrollTo(0, 0)
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2, // Плавность прокрутки
@@ -117,10 +116,10 @@ export default function Home() {
     setIsClient(true);
   }, []);
 
-  const ScrollStack = (e) => {
+  const ScrollUslugi = (e) => {
     e.preventDefault();
     if (!isClient) return;
-    const el = document.getElementById("stack");
+    const el = document.getElementById("uslugi");
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
@@ -141,6 +140,29 @@ export default function Home() {
       daliSound.current.play();
     }
   };
+
+const [startAnimUslugi, setStartAnimUslugi] = useState(false);
+
+  const playAudioUslugi = () => {
+    if (typeof window === "undefined") return;
+
+    uslugiSound.current.play();
+    setStartAnimUslugi(true);
+  };
+
+  useEffect(() => {
+    if (!startAnimUslugi) return;
+
+    const elements = document.querySelectorAll(`.${stack.stack__poslushat}`);
+    if (elements.length === 0) return;
+
+    gsap.to(elements, {
+      opacity: 0,
+      y: -20,
+      duration: 0.6,
+      ease: "power2.out",
+    });
+  }, [startAnimUslugi]);
 
   useEffect(() => {
     if (isOpenJournal) {
@@ -438,10 +460,11 @@ export default function Home() {
   }, []);
   useEffect(() => {
     const stack = document.querySelector(".stack");
+    const stack2 = document.querySelector(".stack2");
     const stack__scroll = document.querySelectorAll(".stack__scroll_anim");
     const stack__saying = document.querySelector(".stack__saying");
-    const stack__body = document.querySelector(".stack__body");
-    const stack__float = document.querySelector(".stack__float");
+    const stack__body = document.querySelectorAll(".stack__body");
+    
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: stack,      // Элемент, который запускает анимацию
@@ -462,11 +485,6 @@ export default function Home() {
         opacity: 1,
         duration: 1,
         ease: 'power2.inOut',
-        onComplete: () => {
-          gsap.to(stack__float,
-            { opacity: 1, duration: 1, ease: 'power2.out' }
-          )
-        },
       });
     tl.to(stack__saying,
       {
@@ -493,6 +511,36 @@ export default function Home() {
         }
       }
     )
+  }, []);
+
+  useEffect(() => {
+    const stack2 = document.querySelector(".stack2");
+    const stack__scroll2 = document.querySelectorAll(".stack__scroll_anim2");
+    const stack__body2 = document.querySelectorAll(".stack__body2");
+    
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: stack2,      // Элемент, который запускает анимацию
+        start: "top center", // Начало триггера
+        end: "center 40%", // Конец триггера
+      },
+    });
+    // Первая анимация: движение и появление
+    tl.fromTo(
+      stack__scroll2,
+      { x: 100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1, ease: 'power2.out' }
+    );
+
+
+    tl.to(stack__body2,
+      {
+        opacity: 1,
+        duration: 1,
+        ease: 'power2.inOut',
+      });
+
+      
   }, []);
   const agnelliSound = useRef(null);
   const isAudioPlaying = useRef(false); // Флаг для отслеживания состояния аудио
@@ -644,12 +692,29 @@ export default function Home() {
   return (
     <main>
 
+
+      {isClient && (
+
+      <audio ref={uslugiSound} className={`${styles.uslugiSound}`} src="/audio/uslugi.mp3"></audio>
+      )}
+      
+      {isClient && (
       <audio ref={daliSound} className={`daliSound ${styles.daliSound}`} src="/audio/dali.mp3" preload="auto" />
+
+      )}
+      
+      {isClient && (
       <audio ref={agnelliSound} className={`${styles.agnelliSound}`} src="/audio/agnelli.mp3"></audio>
+      )}
+      
+      
       {isClient && (
 
         <audio ref={introSound} className={`${styles.introSound}`} src="/audio/intro.mp3"></audio>
       )}
+
+
+      
       <div
         ref={cursorRef}
         style={{
@@ -869,9 +934,7 @@ export default function Home() {
                   <a href="#projects" onClick={ScrollProjects}>
                     Проекты
                   </a>
-                  <a href="#stack" onClick={ScrollStack}>
-                    Stack
-                  </a>
+                  <a href="#stack" onClick={ScrollUslugi}>Услуги                  </a>
                   <a href="https://t.me/Yuriy_Bestuzhev" target="_blank" rel="noopener noreferrer">
                     Контакт                <div className={`${styles.banner__link_svg}`}>
                       <svg width="1.7em" height='1.2em' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1120,15 +1183,59 @@ export default function Home() {
 
 
 
-      <div id="stack" className={`stack ${stack.stack}`}>
+      <div className={`stack ${stack.stack}`}>
+        <div id="uslugi" className={` ${SignikaT.className} ${stack.stack__inner}`}>
+          <div className={`uslugi ${stack.stack__header}`}>
+            <h4 className={` ${stack.stack__scroll_anim}  ${stack.stack__title}`}>Услуги</h4>
+          </div>
+          <div className={`stack__body ${stack.stack__scroll_anim} ${stack.stack__body_col}`}>
+            <h5 className={`cursorHover ${stack.stack__subtitle}`}>Анализ
+            <span                     onClick={playAudioUslugi}
+ className={`${stack.stack__poslushat}`}>
+              послушать
+            </span>
+            </h5>
+            <h5 className={`cursorHover ${stack.stack__subtitle}`}>План/идея
+            <span                     onClick={playAudioUslugi}
+className={`${stack.stack__poslushat}`}>
+              послушать
+            </span>
+            </h5>
+            <h5 className={`cursorHover ${stack.stack__subtitle}`}>Прототип
+            <span                     onClick={playAudioUslugi}
+ className={`${stack.stack__poslushat}`}>
+              послушать
+            </span>
+            </h5>
+            <h5 className={`cursorHover ${stack.stack__subtitle}`}>Дизайн
+            <span                     onClick={playAudioUslugi}
+ className={`${stack.stack__poslushat}`}>
+              послушать
+            </span>
+            </h5>
+            <h5 className={`cursorHover ${stack.stack__subtitle}`}>Разработка
+            <span                     onClick={playAudioUslugi}
+className={`${stack.stack__poslushat}`}>
+              послушать
+            </span>
+            </h5>
+            <h5 className={`cursorHover ${stack.stack__subtitle}`}>Поддержка
+            <span                     onClick={playAudioUslugi}
+className={`${stack.stack__poslushat}`}>
+              послушать
+            </span>
+            </h5>
+          </div>
+        </div>
+        </div>
+        
+      <div className={`stack2 ${stack.stack}`}>
+
         <div className={` ${SignikaT.className} ${stack.stack__inner}`}>
           <div className={`${stack.stack__header}`}>
             <h4 className={`${stack.stack__scroll_anim}  ${stack.stack__title}`}>Stack</h4>
-            <p className={`stack__float ${stack.stack__float}`}>
-            
-            </p>
           </div>
-          <div className={`stack__body ${stack.stack__scroll_anim} ${stack.stack__body}`}>
+          <div className={`stack__body2 ${stack.stack__scroll_anim} ${stack.stack__body}`}>
           <div className={`${stack.stack__col} `}>
             <h5 className={`${stack.stack__subtitle}`}>Frontend</h5>
             <ul className={`${stack.stack__front}`}>

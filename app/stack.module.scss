@@ -7,12 +7,7 @@ $white: #fff;
     z-index: 1;
     position: relative;
     color: #fff;
-    padding-block: 10em;
 
-    @include for-laptop {
-        padding-block: 5em;
-    }
-    
     &__inner {
         display: flex;
         flex-direction: column;
@@ -21,10 +16,19 @@ $white: #fff;
         max-width: 70%;
         margin-left: auto;
         margin-right: auto;
+
+
+        padding-top: 10em;
+        padding-bottom: 5em;
         
+        @include for-laptop {
+            padding-block: 5em;
+        }
+        
+
         @include for-mobile {
-                max-width: 90%;
-            }
+            max-width: 90%;
+        }
 
     }
 
@@ -33,19 +37,9 @@ $white: #fff;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 3rem;
-      }
 
-    &__float {
-        font-size: 1em;
-        font-weight: 100;
-        opacity: 0;
-        transition: .4s ease;
-        text-transform: uppercase;
-
-        @include for-mobile {
-            font-size: 1.7vw;
-        }
     }
+
 
     &__title {
         letter-spacing: -0.05em;
@@ -61,16 +55,81 @@ $white: #fff;
             font-size: 5em;
         }
     }
-    
+
     &__body {
         opacity: 0;
         background-color: #11181e;
         z-index: 10;
         display: flex;
         position: relative;
+
         @include for-laptop {
             display: block;
         }
+    }
+
+    &__body_col {
+        opacity: 0;
+        background-color: #11181e;
+        z-index: 10;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 1em;
+        grid-row-gap: 2em;
+        position: relative;
+
+        @include for-laptop {
+            grid-template-columns: repeat(2, 1fr);
+
+        }
+
+
+
+        @include for-mobile {
+            // grid-template-columns: repeat(1, 1fr);
+        }
+
+        h5 {
+            font-size: 4em;
+            display: flex;
+            flex-direction: column;
+            padding-left: .5em;
+            font-weight: 600;
+            text-transform: capitalize;
+
+
+            @include for-laptop {
+                font-size: 6vw;
+
+            }
+
+            // @include for-mobile {
+            // grid-template-columns: repeat(1, 1fr);
+            // }
+        }
+
+
+        .stack__poslushat {
+            font-size: .4em;
+            font-weight: 300;
+            letter-spacing: .9;
+
+            &::before {
+                content: '';
+                display: inline-block;
+                background-image: url('/icon/start.svg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 1.5em;
+                height: 1.7em;
+                vertical-align: middle;
+            }
+
+        }
+
+        // @include for-laptop {
+        //     display: block;
+        // }
     }
 
 
@@ -98,11 +157,11 @@ $white: #fff;
         padding-bottom: 3em;
         transition: .4s ease;
         text-transform: lowercase;
-        
+
         @include for-mobile {
             font-size: 1.4em;
             gap: .5em;
-    }
+        }
     }
 
     &__buv {
